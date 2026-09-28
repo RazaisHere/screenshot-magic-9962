@@ -21,18 +21,18 @@ export function Hero() {
       />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[linear-gradient(105deg,oklch(0.18_0.02_70/0.88)_0%,oklch(0.18_0.02_70/0.62)_45%,oklch(0.18_0.02_70/0.28)_100%)]"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(105deg,oklch(0.18_0.02_70/0.9)_0%,oklch(0.18_0.02_70/0.66)_45%,oklch(0.18_0.02_70/0.3)_100%)]"
       />
 
       <div className="mx-auto max-w-7xl px-5 pt-32 pb-16 sm:px-8 lg:pt-44 lg:pb-24">
         <div className="grid items-start gap-12 lg:grid-cols-[1.05fr_minmax(0,460px)] lg:gap-16">
           <div className="reveal-up max-w-xl">
-            <p className="eyebrow text-[oklch(0.86_0.13_88)]">Now selling · Islamabad</p>
-            <h1 className="mt-5 font-display text-[clamp(2.5rem,6.2vw,4.5rem)] leading-[1.03] text-[oklch(0.99_0.005_90)]">
+            <p className="eyebrow text-gold-light">Now selling · Islamabad</p>
+            <h1 className="mt-5 font-display text-[clamp(2.5rem,6.2vw,4.5rem)] leading-[1.03] text-on-dark">
               Elevate your life
               <span className="block text-gold-gradient">at Goldcrest Views</span>
             </h1>
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-[oklch(0.93_0.008_90)]/85 sm:text-lg">
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-on-dark-muted/85 sm:text-lg">
               Studio, 1, 2 and 3-bedroom apartments in a landmark high-rise address — designed for
               the way Islamabad is growing upward.
             </p>
@@ -44,21 +44,21 @@ export function Hero() {
               <Button
                 variant="goldOutline"
                 size="xl"
-                className="border-[oklch(0.99_0.005_90)]/40 text-[oklch(0.99_0.005_90)] hover:bg-[oklch(0.99_0.005_90)]/10"
+                className="border-on-dark/40 text-on-dark hover:bg-on-dark/10"
                 asChild
               >
                 <a href="#gallery">Explore the gallery</a>
               </Button>
             </div>
 
-            <dl className="mt-12 grid max-w-lg grid-cols-2 gap-x-6 gap-y-6 border-t border-[oklch(0.99_0.005_90)]/20 pt-8 sm:grid-cols-3">
+            <dl className="mt-12 grid max-w-lg grid-cols-2 gap-x-6 gap-y-6 border-t border-on-dark/20 pt-8 sm:grid-cols-3">
               {STATS.map(({ icon: Icon, label, value }) => (
                 <div key={label} className="min-w-0">
-                  <Icon className="size-4 text-[oklch(0.86_0.13_88)]" aria-hidden />
-                  <dt className="mt-2 text-[0.65rem] tracking-[0.18em] text-[oklch(0.93_0.008_90)]/60 uppercase">
+                  <Icon className="size-4 text-gold-light" aria-hidden />
+                  <dt className="mt-2 text-[0.65rem] tracking-[0.18em] text-on-dark-muted/65 uppercase">
                     {label}
                   </dt>
-                  <dd className="mt-1 font-display text-lg text-[oklch(0.99_0.005_90)]">{value}</dd>
+                  <dd className="mt-1 font-display text-lg text-on-dark">{value}</dd>
                 </div>
               ))}
             </dl>
@@ -80,7 +80,7 @@ export function Hero() {
 
         <a
           href="#overview"
-          className="mt-14 inline-flex items-center gap-2 text-[0.7rem] tracking-[0.2em] text-[oklch(0.93_0.008_90)]/70 uppercase transition-colors hover:text-[oklch(0.99_0.005_90)]"
+          className="mt-14 inline-flex items-center gap-2 text-[0.7rem] tracking-[0.2em] text-on-dark-muted/70 uppercase transition-colors hover:text-on-dark"
         >
           <ArrowDown className="size-4 animate-bounce" aria-hidden />
           Discover the project
