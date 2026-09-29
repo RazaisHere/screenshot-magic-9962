@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   AMENITIES,
   DEVELOPER_PILLARS,
@@ -18,7 +18,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Check, Quote, Sparkles } from "lucide-react";
+import { Check, DraftingCompass, Globe, HardHat, Quote, ScrollText, Sparkles } from "lucide-react";
 import facade from "@/assets/facade.jpg";
 import interior from "@/assets/interior.jpg";
 import construction from "@/assets/construction.jpg";
@@ -163,11 +163,14 @@ export function Amenities() {
 
         <div className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {AMENITIES.map((a, i) => (
-            <div key={a.title} className="group flex gap-5 border-t border-border pt-6">
-              <span className="font-display text-2xl text-gold-deep/70 tabular-nums">
+            <div
+              key={a.title}
+              className="group -mx-4 flex gap-5 rounded-md border-t border-border px-4 pt-6 transition-[background-color,border-color,box-shadow] duration-500 hover:border-gold/45 hover:bg-sand/55 hover:shadow-[var(--shadow-soft)]"
+            >
+              <span className="font-display text-2xl text-gold-deep/70 tabular-nums transition-colors duration-500 group-hover:text-gold-deep">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div className="min-w-0">
+              <div className="min-w-0 transition-transform duration-500 group-hover:translate-x-1">
                 <h3 className="font-display text-xl leading-snug">{a.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
               </div>
@@ -224,6 +227,72 @@ export function Investment() {
 
 /* ---------------- Construction progress ---------------- */
 
+function ConstructionMeters() {
+  const listRef = useRef<HTMLDListElement>(null);
+  const [ratio, setRatio] = useState(0);
+
+  useEffect(() => {
+    const node = listRef.current;
+    if (!node) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setRatio(1);
+      return;
+    }
+
+    let frame = 0;
+    const duration = 1200;
+    const play = (startedAt: number, now: number) => {
+      const t = Math.min(1, (now - startedAt) / duration);
+      setRatio(1 - (1 - t) ** 3);
+      if (t < 1) frame = requestAnimationFrame((next) => play(startedAt, next));
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        frame = requestAnimationFrame((now) => play(now, now));
+      },
+      { threshold: 0.25 },
+    );
+
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return (
+    <dl ref={listRef} className="mt-10 space-y-7">
+      {PROGRESS_ITEMS.map((p) => (
+        <div key={p.label}>
+          <div className="flex items-baseline justify-between gap-4">
+            <dt className="min-w-0 truncate text-sm font-medium">{p.label}</dt>
+            <dd className="shrink-0 font-display text-lg text-gold-deep tabular-nums">
+              {Math.round(p.value * ratio)}%
+            </dd>
+          </div>
+          <div
+            className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-sand"
+            role="progressbar"
+            aria-valuenow={p.value}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label={p.label}
+          >
+            <div
+              className="h-full rounded-full bg-[image:var(--gradient-gold)]"
+              style={{ width: `${p.value * ratio}%` }}
+            />
+          </div>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 export function ConstructionProgress() {
   return (
     <section id="progress" className="py-24 lg:py-32">
@@ -238,31 +307,7 @@ export function ConstructionProgress() {
             the building as it rises.
           </p>
 
-          <dl className="mt-10 space-y-7">
-            {PROGRESS_ITEMS.map((p) => (
-              <div key={p.label}>
-                <div className="flex items-baseline justify-between gap-4">
-                  <dt className="min-w-0 truncate text-sm font-medium">{p.label}</dt>
-                  <dd className="shrink-0 font-display text-lg text-gold-deep tabular-nums">
-                    {p.value}%
-                  </dd>
-                </div>
-                <div
-                  className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-sand"
-                  role="progressbar"
-                  aria-valuenow={p.value}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                  aria-label={p.label}
-                >
-                  <div
-                    className="h-full rounded-full bg-[image:var(--gradient-gold)] transition-[width] duration-700"
-                    style={{ width: `${p.value}%` }}
-                  />
-                </div>
-              </div>
-            ))}
-          </dl>
+          <ConstructionMeters />
 
           <InquiryCta variant="goldOutline" className="mt-10">
             Request the latest site report
@@ -270,15 +315,20 @@ export function ConstructionProgress() {
         </div>
 
         <figure className="lg:sticky lg:top-28">
-          <img
-            src={construction}
-            alt="The Goldcrest Views structure under construction with a tower crane"
-            width={1600}
-            height={1104}
-            loading="lazy"
-            className="aspect-[4/3] w-full rounded-md object-cover shadow-[var(--shadow-lift)]"
-          />
-       
+          <div className="group relative overflow-hidden rounded-md shadow-[var(--shadow-lift)]">
+            <img
+              src={construction}
+              alt="The Goldcrest Views structure under construction with a tower crane"
+              width={1600}
+              height={1104}
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,oklch(0.18_0.02_70/0.22),transparent_46%)] transition-opacity duration-700 group-hover:opacity-80"
+            />
+          </div>
         </figure>
       </div>
     </section>
@@ -322,6 +372,13 @@ export function Verification() {
 
 /* ---------------- Developer ---------------- */
 
+const DEVELOPER_ICONS = {
+  "Cross-border experience": Globe,
+  "Design-led practice": DraftingCompass,
+  "Construction discipline": HardHat,
+  "Client-side transparency": ScrollText,
+} as const;
+
 export function Developer() {
   return (
     <section className="border-y border-border bg-sand/50 py-24 lg:py-32">
@@ -333,13 +390,17 @@ export function Developer() {
           </h2>
         </div>
         <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {DEVELOPER_PILLARS.map((d) => (
-            <div key={d.title}>
-              <hr className="rule-gold max-w-12" />
-              <h3 className="mt-5 font-display text-xl">{d.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d.body}</p>
-            </div>
-          ))}
+          {DEVELOPER_PILLARS.map((d) => {
+            const Icon = DEVELOPER_ICONS[d.title as keyof typeof DEVELOPER_ICONS];
+            return (
+              <div key={d.title}>
+                <Icon className="size-4 text-gold-deep" aria-hidden />
+                <hr className="rule-gold mt-5 max-w-12" />
+                <h3 className="mt-5 font-display text-xl">{d.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d.body}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { submitInquiry } from "@/lib/inquiry-sheet";
 import { cn } from "@/lib/utils";
 
 const schema = z.object({
@@ -18,20 +19,20 @@ const schema = z.object({
     .max(24)
     .regex(/^[+()\-\s\d]+$/, "Please enter a valid phone number"),
   email: z.string().trim().email("Please enter a valid email address").max(120),
+  cityCountry: z.string().trim().min(2, "Please enter your city or country").max(80),
   unitType: z.string().min(1, "Please choose a unit type"),
-  budget: z.string().min(1, "Please choose a budget range"),
   message: z.string().trim().max(600).optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
 
 const UNIT_TYPES = ["Studio", "1 Bedroom", "2 Bedroom", "3 Bedroom", "Not sure yet"];
-const BUDGETS = ["Under PKR 1 crore", "PKR 1–2 crore", "PKR 2–3 crore", "PKR 3 crore +"];
 
 const fieldBase =
   "h-11 rounded-sm border-input bg-background/95 text-sm placeholder:text-muted-foreground/70 focus-visible:ring-2 focus-visible:ring-gold";
 
 export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) {
+  const fieldId = useId();
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
   const {
@@ -45,8 +46,8 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
       fullName: "",
       phone: "",
       email: "",
+      cityCountry: "",
       unitType: "",
-      budget: "",
       message: "",
     },
   });
@@ -54,9 +55,7 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
   const onSubmit = async (values: FormValues) => {
     setStatus("idle");
     try {
-      await new Promise((r) => setTimeout(r, 700));
-      // eslint-disable-next-line no-console
-      console.info("Inquiry submitted", values);
+      await submitInquiry(values);
       setStatus("success");
       reset();
     } catch {
@@ -95,11 +94,11 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="min-w-0">
-          <Label htmlFor="fullName" className={labelCls}>
+          <Label htmlFor={`${fieldId}-fullName`} className={labelCls}>
             Full name
           </Label>
           <Input
-            id="fullName"
+            id={`${fieldId}-fullName`}
             placeholder="Your name"
             autoComplete="name"
             aria-invalid={!!errors.fullName}
@@ -109,11 +108,11 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
           <Err name="fullName" />
         </div>
         <div className="min-w-0">
-          <Label htmlFor="phone" className={labelCls}>
-            Phone
+          <Label htmlFor={`${fieldId}-phone`} className={labelCls}>
+            Phone/WhatsApp
           </Label>
           <Input
-            id="phone"
+            id={`${fieldId}-phone`}
             type="tel"
             placeholder="+92 300 0000000"
             autoComplete="tel"
@@ -125,29 +124,42 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
         </div>
       </div>
 
-      <div className="min-w-0">
-        <Label htmlFor="email" className={labelCls}>
-          Email
-        </Label>
-        <Input
-          id="email"
-          type="email"
-          placeholder="you@example.com"
-          autoComplete="email"
-          aria-invalid={!!errors.email}
-          className={fieldBase}
-          {...register("email")}
-        />
-        <Err name="email" />
-      </div>
-
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="min-w-0">
-          <Label htmlFor="unitType" className={labelCls}>
-            Unit type
+          <Label htmlFor={`${fieldId}-email`} className={labelCls}>
+            Email
+          </Label>
+          <Input
+            id={`${fieldId}-email`}
+            type="email"
+            placeholder="you@example.com"
+            autoComplete="email"
+            aria-invalid={!!errors.email}
+            className={fieldBase}
+            {...register("email")}
+          />
+          <Err name="email" />
+        </div>
+        <div className="min-w-0">
+          <Label htmlFor={`${fieldId}-cityCountry`} className={labelCls}>
+            City/Country
+          </Label>
+          <Input
+            id={`${fieldId}-cityCountry`}
+            placeholder="Islamabad"
+            autoComplete="address-level2"
+            aria-invalid={!!errors.cityCountry}
+            className={fieldBase}
+            {...register("cityCountry")}
+          />
+          <Err name="cityCountry" />
+        </div>
+        <div className="min-w-0 sm:col-span-2">
+          <Label htmlFor={`${fieldId}-unitType`} className={labelCls}>
+            Preferred unit type
           </Label>
           <select
-            id="unitType"
+            id={`${fieldId}-unitType`}
             aria-invalid={!!errors.unitType}
             className={cn(
               fieldBase,
@@ -164,36 +176,14 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
           </select>
           <Err name="unitType" />
         </div>
-        <div className="min-w-0">
-          <Label htmlFor="budget" className={labelCls}>
-            Budget range
-          </Label>
-          <select
-            id="budget"
-            aria-invalid={!!errors.budget}
-            className={cn(
-              fieldBase,
-              "w-full border px-3 outline-none focus-visible:ring-2 focus-visible:ring-gold",
-            )}
-            {...register("budget")}
-          >
-            <option value="">Select a range</option>
-            {BUDGETS.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
-          <Err name="budget" />
-        </div>
       </div>
 
       <div className="min-w-0">
-        <Label htmlFor="message" className={labelCls}>
-          Message <span className="normal-case opacity-60">(optional)</span>
+        <Label htmlFor={`${fieldId}-message`} className={labelCls}>
+          Optional message
         </Label>
         <Textarea
-          id="message"
+          id={`${fieldId}-message`}
           rows={3}
           placeholder="Tell us what you're looking for"
           className="resize-none rounded-sm border-input bg-background/95 text-sm focus-visible:ring-2 focus-visible:ring-gold"
@@ -213,9 +203,7 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
         {isSubmitting ? "Sending" : "Request an appointment"}
       </Button>
 
-      <p className="text-center text-xs text-muted-foreground">
-        We respect your privacy. Your details are used only to respond to this inquiry.
-      </p>
+    
     </form>
   );
 }

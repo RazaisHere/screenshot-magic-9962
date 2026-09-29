@@ -72,21 +72,18 @@ export function Hero() {
             className="reveal-up scroll-mt-28 rounded-lg border border-border/60 bg-card/95 p-6 shadow-[var(--shadow-lift)] backdrop-blur-xl sm:p-8"
           >
             <p className="eyebrow">Private consultation</p>
-            <h2 className="mt-2 font-display text-2xl sm:text-3xl">Request current pricing</h2>
-            <p className="mt-2 mb-6 text-sm text-muted-foreground">
-              Share a few details and our team will send availability, floor plans and the current
-              payment plan.
-            </p>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl mb-6">Request current pricing</h2>
+            
             <InquiryForm tone="onImage" />
           </div>
         </div>
 
         <a
           href="#overview"
-          className="mt-14 inline-flex items-center gap-2 text-[0.7rem] tracking-[0.2em] text-on-dark-muted/70 uppercase transition-colors hover:text-on-dark"
+          className="mx-auto mt-14 flex w-fit flex-col items-center gap-2 text-[0.7rem] tracking-[0.2em] text-on-dark-muted/70 uppercase transition-colors hover:text-on-dark"
         >
+          Scroll
           <ArrowDown className="size-4 animate-bounce" aria-hidden />
-          Discover the project
         </a>
       </div>
     </section>
