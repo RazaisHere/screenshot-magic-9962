@@ -2,10 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { GALLERY_CATEGORIES, type GalleryCategory } from "./content";
-import heroTower from "@/assets/hero-tower.jpg";
-import facade from "@/assets/facade.jpg";
-import interior from "@/assets/interior.jpg";
-import construction from "@/assets/construction.jpg";
 
 type Shot = {
   src: string;
@@ -16,29 +12,45 @@ type Shot = {
 
 const SHOTS: Shot[] = [
   {
-    src: heroTower,
-    alt: "The tower rising above the city at golden hour",
+    src: "/gallery/views/v2-01.jpg",
+    alt: "Wide aerial of the Goldcrest Views towers in the Islamabad neighbourhood",
     category: "Exteriors",
     span: "md:col-span-2 md:row-span-2",
   },
-  { src: facade, alt: "Curved balconies and glazing detail on the facade", category: "Exteriors" },
-  { src: interior, alt: "Living room with floor-to-ceiling city windows", category: "Interiors" },
   {
-    src: interior,
-    alt: "Warm ivory interior finishes with brass detailing",
-    category: "Amenities",
-    span: "md:col-span-2",
+    src: "/gallery/views/v1-01.jpg",
+    alt: "Close aerial of the towers with cranes on site",
+    category: "Construction",
   },
-  { src: heroTower, alt: "Long city and hill views from the upper floors", category: "Views" },
-  { src: construction, alt: "Current structure and tower crane on site", category: "Construction" },
   {
-    src: facade,
-    alt: "Balcony depth and shading along the tower elevation",
+    src: "/gallery/views/v2-05.jpg",
+    alt: "The towers seen against the wider city",
     category: "Views",
   },
   {
-    src: construction,
-    alt: "Concrete frame progressing floor by floor",
+    src: "/gallery/views/v1-06.jpg",
+    alt: "The tower elevation from the air",
+    category: "Exteriors",
+    span: "md:col-span-2",
+  },
+  {
+    src: "/gallery/views/v2-09.jpg",
+    alt: "Long view across the site and surrounding streets",
+    category: "Views",
+  },
+  {
+    src: "/gallery/views/v1-18.jpg",
+    alt: "Structure and cranes progressing on the towers",
+    category: "Construction",
+  },
+  {
+    src: "/gallery/views/v1-04.jpg",
+    alt: "Overhead view of the Goldcrest Views site",
+    category: "Views",
+  },
+  {
+    src: "/gallery/views/v2-13.jpg",
+    alt: "The construction site from above the neighbourhood",
     category: "Construction",
   },
 ];
@@ -102,11 +114,10 @@ export function Gallery() {
         <div className="max-w-2xl">
           <p className="eyebrow">Gallery</p>
           <h2 className="mt-3 font-display text-4xl sm:text-5xl">
-            A considered view of Goldcrest living
+            Views of the towers
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Exteriors, interiors, shared amenities and live construction — filter by what you want
-            to see.
+            Exteriors, neighbourhood views and live construction — filter by what you want to see.
           </p>
         </div>
 

@@ -22,17 +22,17 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Goldcrest Views — High-rise apartments in Islamabad" },
+      { title: "Goldcrest Views — Luxury residences in Giga City" },
       {
         name: "description",
         content:
-          "Studio to 3-bedroom apartments at Goldcrest Views, a landmark high-rise address in Islamabad. Amenity floors, flexible payment plans and live construction updates.",
+          "Seven 40-storey towers by Al-Ghurair Giga in Giga City, Islamabad. Studios to 4-bedroom apartments, penthouses and duplexes, with 3-year payment plans.",
       },
-      { property: "og:title", content: "Goldcrest Views — High-rise apartments in Islamabad" },
+      { property: "og:title", content: "Goldcrest Views — Luxury residences in Giga City" },
       {
         property: "og:description",
         content:
-          "A landmark residential tower in Islamabad. Explore layouts, amenities, payment plans and construction progress.",
+          "A luxury residential complex beside Giga Mall. Studios, apartments, penthouses and duplexes.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -26,12 +26,24 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-const UNIT_TYPES = ["Studio", "1 Bedroom", "2 Bedroom", "3 Bedroom", "Not sure yet"];
+const UNIT_TYPES = [
+  "Studio",
+  "1 Bedroom",
+  "2 Bedroom",
+  "3 Bedroom",
+  "4 Bedroom",
+  "Penthouse",
+  "Duplex",
+  "Not sure yet",
+];
 
-const fieldBase =
-  "h-11 rounded-sm border-input bg-background/95 text-sm placeholder:text-muted-foreground/70 focus-visible:ring-2 focus-visible:ring-gold";
-
-export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) {
+export function InquiryForm({
+  tone = "light",
+  compact = false,
+}: {
+  tone?: "light" | "onImage";
+  compact?: boolean;
+}) {
   const fieldId = useId();
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
@@ -63,8 +75,14 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
     }
   };
 
+  const fieldBase = cn(
+    "rounded-sm border-input bg-background/95 text-sm placeholder:text-muted-foreground/70 focus-visible:ring-2 focus-visible:ring-gold",
+    compact ? "h-9" : "h-11",
+  );
+
   const labelCls = cn(
-    "mb-1.5 block text-[0.7rem] tracking-[0.14em] uppercase",
+    "block tracking-[0.14em] uppercase",
+    compact ? "mb-1 text-[0.62rem]" : "mb-1.5 text-[0.7rem]",
     tone === "onImage" ? "text-foreground/70" : "text-muted-foreground",
   );
 
@@ -77,7 +95,7 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center gap-4 px-2 py-14 text-center">
+      <div className={cn("flex flex-col items-center gap-4 px-2 text-center", compact ? "py-6" : "py-14")}>
         <CheckCircle2 className="size-10 text-gold-deep" />
         <h3 className="font-display text-2xl">Thank you — we have your details</h3>
         <p className="max-w-sm text-sm text-muted-foreground">
@@ -91,8 +109,8 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
-      <div className="grid gap-4 sm:grid-cols-2">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className={compact ? "space-y-2" : "space-y-4"}>
+      <div className={cn("grid", compact ? "grid-cols-2 gap-2" : "gap-4 sm:grid-cols-2")}>
         <div className="min-w-0">
           <Label htmlFor={`${fieldId}-fullName`} className={labelCls}>
             Full name
@@ -124,7 +142,7 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className={cn("grid", compact ? "grid-cols-2 gap-2" : "gap-4 sm:grid-cols-2")}>
         <div className="min-w-0">
           <Label htmlFor={`${fieldId}-email`} className={labelCls}>
             Email
@@ -154,7 +172,7 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
           />
           <Err name="cityCountry" />
         </div>
-        <div className="min-w-0 sm:col-span-2">
+        <div className="col-span-2 min-w-0">
           <Label htmlFor={`${fieldId}-unitType`} className={labelCls}>
             Preferred unit type
           </Label>
@@ -178,13 +196,13 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
         </div>
       </div>
 
-      <div className="min-w-0">
+      <div className={cn("min-w-0", compact && "max-sm:hidden")}>
         <Label htmlFor={`${fieldId}-message`} className={labelCls}>
           Optional message
         </Label>
         <Textarea
           id={`${fieldId}-message`}
-          rows={3}
+          rows={compact ? 2 : 3}
           placeholder="Tell us what you're looking for"
           className="resize-none rounded-sm border-input bg-background/95 text-sm focus-visible:ring-2 focus-visible:ring-gold"
           {...register("message")}
@@ -198,7 +216,13 @@ export function InquiryForm({ tone = "light" }: { tone?: "light" | "onImage" }) 
         </p>
       )}
 
-      <Button type="submit" variant="gold" size="xl" disabled={isSubmitting} className="w-full">
+      <Button
+        type="submit"
+        variant="gold"
+        size={compact ? "default" : "xl"}
+        disabled={isSubmitting}
+        className="w-full"
+      >
         {isSubmitting && <Loader2 className="size-4 animate-spin" />}
         {isSubmitting ? "Sending" : "Request an appointment"}
       </Button>

@@ -10,94 +10,61 @@ export const NAV_LINKS = [
 
 export const HIGHLIGHTS = [
   {
-    title: "A high-rise address",
-    body: "Apartment living raised above the street, with long views in every direction.",
+    title: "Seven 40-storey towers",
+    body: "Dubai-inspired towers that redefine Islamabad’s skyline.",
   },
   {
-    title: "Studio to 3-bedroom",
-    body: "A range of layouts for singles, couples and growing families.",
+    title: "Studios to duplexes",
+    body: "Studios, 1–4 bedroom apartments, penthouses and duplexes.",
   },
   {
-    title: "Amenity-led community",
-    body: "Shared spaces designed for daily use, not just for the brochure.",
+    title: "World-class amenities",
+    body: "A temperature-controlled pool, private security, parking and a podium deck.",
   },
   {
-    title: "Structured payment plans",
-    body: "Flexible instalment routes across the construction timeline.",
+    title: "Three-year payment plans",
+    body: "Flexible 3-year plans, with rental management for overseas investors.",
   },
 ];
 
 export const AMENITIES = [
   {
-    title: "Rooftop infinity-edge pool",
-    body: "A swimming deck set against the open sky, reserved for residents.",
-  },
-  { title: "Residents' fitness floor", body: "Cardio, strength and stretch zones with daylight." },
-  {
-    title: "Central lobby and concierge",
-    body: "A staffed arrival point handling guests, deliveries and requests.",
+    title: "Swimming Pool",
+    body: "Temperature-controlled pool for exercise and relaxation.",
   },
   {
-    title: "Community and event lounge",
-    body: "A bookable indoor space for gatherings and celebrations.",
+    title: "Private Security",
+    body: "24/7 protection with trained staff and surveillance.",
   },
   {
-    title: "Children's play and family zones",
-    body: "Safe, supervised-friendly areas for younger residents.",
+    title: "Parking Space",
+    body: "Dedicated on-site parking zones with direct building access.",
   },
   {
-    title: "Co-working and study rooms",
-    body: "Quiet desks and meeting corners a lift ride from home.",
-  },
-  { title: "Covered parking", body: "Sheltered resident and visitor parking within the building." },
-  {
-    title: "Retail and dining at ground level",
-    body: "Everyday convenience on the podium floors.",
-  },
-  {
-    title: "Backup power and water systems",
-    body: "Continuity infrastructure for uninterrupted living.",
+    title: "Podium Level",
+    body: "Elevated deck for open-air lounging and social gatherings.",
   },
 ];
 
 export const PAYMENT_STEPS = [
   {
     step: "01",
-    title: "Booking",
-    body: "Reserve your unit and confirm the layout, floor and orientation you want.",
+    title: "Three-year plan",
+    body: "Flexible payments structured across three years.",
   },
   {
     step: "02",
-    title: "Down payment",
-    body: "Complete the initial payment and receive your allocation documents.",
+    title: "Rental management",
+    body: "Dedicated rental management for overseas investors.",
   },
   {
     step: "03",
-    title: "Instalments",
-    body: "Pay in scheduled instalments across the construction period.",
-  },
-  {
-    step: "04",
-    title: "Possession",
-    body: "Settle the final balance and take handover of your apartment.",
+    title: "High returns",
+    body: "Luxury living paired with a residential investment.",
   },
 ];
 
-export const PROGRESS_ITEMS = [
-  { label: "Excavation and foundations", value: 100 },
-  { label: "Structure and grey work", value: 62 },
-  { label: "Facade and glazing", value: 28 },
-  { label: "MEP and fit-out", value: 12 },
-];
-
-export const GALLERY_CATEGORIES = [
-  "All",
-  "Exteriors",
-  "Interiors",
-  "Amenities",
-  "Views",
-  "Construction",
-] as const;
+export const GALLERY_CATEGORIES = ["All", "Exteriors", "Views", "Construction"] as const;
 
 export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
 
@@ -124,7 +91,7 @@ export const DEVELOPER_PILLARS = [
   },
   {
     title: "Client-side transparency",
-    body: "Documented milestones, payment records and open progress reporting.",
+    body: "A clear record of the purchase, from allocation through to handover.",
   },
 ];
 
@@ -138,7 +105,7 @@ export const EXPERIENCES = [
     title: "Virtual tour",
     body: "Review the project remotely with a guided call for overseas buyers.",
   },
-  { title: "Sample apartment", body: "Experience finishes and spatial proportions at full scale." },
+  { title: "Sample apartment", body: "Review finishes and layouts with the sales team." },
 ];
 
 export const TESTIMONIALS = [
@@ -150,30 +117,30 @@ export const TESTIMONIALS = [
   },
   {
     quote:
-      "Buying from abroad was straightforward. Progress updates arrived on schedule and matched what we saw on site.",
+      "Buying from abroad was straightforward. The team kept every document clear before we committed.",
     name: "Bilal K.",
     role: "Overseas investor",
   },
   {
     quote:
-      "We compared several towers in the area. The layouts here simply used the space better for a family.",
-    name: "Hina S.",
-    role: "Resident family",
+      "Being next to Giga Mall decided it for us. The three-year plan let us book without waiting for possession.",
+    name: "Sara M.",
+    role: "Family buyer",
   },
 ];
 
 export const FAQS = [
   {
     q: "Where is Goldcrest Views located?",
-    a: "The tower sits within Islamabad's growing high-rise corridor, positioned for access to the city's main arteries and everyday amenities. Our team will share the exact plot details and a site map on request.",
+    a: "Goldcrest Views is in the prime heart of Giga City, Islamabad, adjacent to Giga Mall, with connectivity along GT Road and the Islamabad Highway to the twin cities.",
   },
   {
     q: "What unit types are available?",
-    a: "Layouts range from studios through to three-bedroom apartments. Availability varies by floor and orientation, so the sales team can confirm what is currently open for booking.",
+    a: "Studios, 1 to 4 bedroom apartments, penthouses and duplexes, with smart-home technology in every home. The sales team confirms what is open for booking.",
   },
   {
     q: "Is a payment plan available?",
-    a: "Yes. Booking, down payment, scheduled instalments and a final balance at possession. The exact schedule is issued in writing before you commit.",
+    a: "Yes. Flexible 3-year payment plans are available, along with dedicated rental management for overseas investors.",
   },
   {
     q: "How can I verify the project before booking?",
@@ -181,10 +148,10 @@ export const FAQS = [
   },
   {
     q: "Can overseas buyers purchase remotely?",
-    a: "Yes. Virtual tours, digital documentation and scheduled progress reporting are available so you can complete the process from abroad.",
+    a: "Yes. Overseas investors can purchase remotely, and dedicated rental management is available once the home is ready.",
   },
   {
     q: "When is possession expected?",
-    a: "Handover follows completion of the construction programme. Current stage-by-stage progress is published in the construction section of this page.",
+    a: "The project is in progress. Handover follows completion of construction, and the team shares the latest site position on request.",
   },
 ];

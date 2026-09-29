@@ -288,6 +288,48 @@
   animation: modal-panel-out-kf 240ms ease-out both;
 }
 
+/* Short phones cannot fit the enquiry card inside one screen without clipping the headline. */
+@media (max-width: 1023px) and (max-height: 700px) {
+  .hero-inquiry {
+    display: none;
+  }
+}
+
+/* Centering a stack taller than the screen hides the headline under the navbar. */
+@media (max-width: 1023px) and (max-height: 780px) {
+  .hero-stack {
+    align-content: start;
+    padding-top: 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-inquiry form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hero-inquiry form > :not(:last-child) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .hero-inquiry form .grid {
+    gap: 1rem;
+  }
+
+  .hero-inquiry input,
+  .hero-inquiry select {
+    height: 2.75rem;
+  }
+
+  .hero-inquiry textarea {
+    height: 4.5rem;
+    min-height: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

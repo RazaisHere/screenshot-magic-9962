@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import {
   AMENITIES,
   DEVELOPER_PILLARS,
@@ -6,7 +6,6 @@ import {
   FAQS,
   HIGHLIGHTS,
   PAYMENT_STEPS,
-  PROGRESS_ITEMS,
   TESTIMONIALS,
   VERIFICATION_POINTS,
 } from "./content";
@@ -18,10 +17,23 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Check, DraftingCompass, Globe, HardHat, Quote, ScrollText, Sparkles } from "lucide-react";
-import facade from "@/assets/facade.jpg";
+import {
+  BedDouble,
+  Building2,
+  Check,
+  DraftingCompass,
+  Globe,
+  HardHat,
+  Quote,
+  ScrollText,
+  ShieldCheck,
+  SquareParking,
+  Trees,
+  Users,
+  Wallet,
+  Waves,
+} from "lucide-react";
 import interior from "@/assets/interior.jpg";
-import construction from "@/assets/construction.jpg";
 
 function InquiryCta({
   children,
@@ -44,27 +56,35 @@ function InquiryCta({
 
 /* ---------------- Highlights ---------------- */
 
+const HIGHLIGHT_ICONS = {
+  "Seven 40-storey towers": Building2,
+  "Studios to duplexes": BedDouble,
+  "World-class amenities": Users,
+  "Three-year payment plans": Wallet,
+} as const;
+
 export function Highlights() {
   return (
     <section id="overview" className="relative z-10 -mt-px bg-background">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <p className="border-b border-border py-6 text-center text-[0.65rem] tracking-[0.24em] text-muted-foreground uppercase">
-          A landmark residential address in Islamabad&rsquo;s emerging high-rise corridor
+          Seven 40-storey towers by Al-Ghurair Giga, in the heart of Giga City
         </p>
-        <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {HIGHLIGHTS.map((h) => (
-            <div
-              key={h.title}
-              className="group bg-background p-8 transition-colors duration-500 hover:bg-sand/70"
-            >
-              <Sparkles
-                className="size-4 text-gold-deep transition-transform duration-500 group-hover:scale-110"
-                aria-hidden
-              />
-              <h3 className="mt-5 font-display text-xl">{h.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{h.body}</p>
-            </div>
-          ))}
+        <div className="grid gap-4 py-8 sm:grid-cols-2 lg:grid-cols-4">
+          {HIGHLIGHTS.map((h) => {
+            const Icon = HIGHLIGHT_ICONS[h.title as keyof typeof HIGHLIGHT_ICONS];
+            return (
+              <article key={h.title} className="surface-card group rounded-md p-7">
+                <Icon
+                  className="size-5 text-gold-deep transition-transform duration-500 group-hover:scale-110"
+                  aria-hidden
+                />
+                <hr className="rule-gold mt-5 max-w-10" />
+                <h3 className="mt-4 font-display text-xl">{h.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{h.body}</p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -80,8 +100,8 @@ export function Location() {
         <figure className="relative">
           <div className="group relative overflow-hidden rounded-md shadow-[var(--shadow-lift)]">
             <img
-              src={facade}
-              alt="Curved balconies and warm stone detailing on the tower facade"
+              src="/gallery/views/v2-01.jpg"
+              alt="Aerial view of the Goldcrest Views towers within the Islamabad neighbourhood"
               width={1280}
               height={1600}
               loading="lazy"
@@ -101,17 +121,16 @@ export function Location() {
         <div className="max-w-xl lg:justify-self-end">
           <p className="eyebrow">Location</p>
           <h2 className="mt-3 font-display text-4xl leading-[1.08] sm:text-5xl">
-            A landmark address in Islamabad&rsquo;s evolving skyline
+            Islamabad&rsquo;s evolving skyline
           </h2>
           <hr className="rule-gold my-7 max-w-24" />
           <p className="text-base leading-relaxed text-muted-foreground">
-            Islamabad is building upward. Goldcrest Views is positioned within the city&rsquo;s
-            emerging high-rise corridor, where vertical living, everyday retail and connected roads
-            meet in one place.
+            Goldcrest Views stands in the prime heart of Giga City, adjacent to Giga Mall. Seven
+            40-storey towers redefine Islamabad&rsquo;s skyline from this address.
           </p>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            The result is an address that keeps the calm of the capital close, while putting daily
-            conveniences within a short journey of your front door.
+            Connectivity runs along GT Road and the Islamabad Highway, linking the community to the
+            twin cities.
           </p>
           <InquiryCta variant="goldOutline" className="mt-9">
             Request the location map
@@ -126,25 +145,42 @@ export function Location() {
 
 export function Inspiration() {
   return (
-    <section className="border-y border-border bg-sand/50 py-24 lg:py-28">
-      <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
-        <p className="eyebrow">Design philosophy</p>
-        <h2 className="mt-4 font-display text-4xl leading-[1.1] sm:text-5xl">
-          Dubai inspiration, Islamabad perspective
+    <section className="relative isolate overflow-hidden bg-ink py-28 text-center lg:py-36">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-1/2 left-1/2 h-[28rem] w-[min(56rem,90vw)] -translate-x-1/2 -translate-y-[60%] bg-[radial-gradient(ellipse_at_center,oklch(0.72_0.13_72/0.34),transparent_68%)]"
+      />
+      <div className="relative mx-auto max-w-4xl px-5 sm:px-8">
+        <p className="eyebrow text-gold-light">Design philosophy</p>
+        <h2 className="mt-6 font-display text-[clamp(3.4rem,9vw,7rem)] leading-[0.88] font-semibold tracking-tight text-gold-gradient">
+          Dubai inspiration
+          <span className="mt-4 block font-sans text-[clamp(1.55rem,3.2vw,2.45rem)] leading-tight font-semibold tracking-tight text-on-dark">
+            Islamabad perspective
+          </span>
         </h2>
-        <hr className="rule-gold mx-auto my-8 max-w-32" />
-        <p className="text-lg leading-relaxed text-muted-foreground">
-          The tower borrows the discipline of Gulf high-rise design — generous glazing, shaded
-          balconies, amenity floors that residents actually use — and adapts it to the light,
-          climate and family rhythms of Islamabad.
+        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-on-dark-muted/75 sm:text-lg">
+          Dubai-inspired luxury meets Islamabad&rsquo;s natural beauty — modern sophistication with
+          timeless elegance. Technology and sustainable design work together, so every element is
+          both beautiful and useful, with care for the environment and the community.
         </p>
-     
+        <div aria-hidden className="mx-auto mt-12 flex items-center justify-center gap-4">
+          <span className="h-px w-16 bg-gold-light/80" />
+          <span className="size-2 rounded-full border border-gold-light" />
+          <span className="h-px w-16 bg-gold-light/80" />
+        </div>
       </div>
     </section>
   );
 }
 
 /* ---------------- Amenities ---------------- */
+
+const AMENITY_ICONS = {
+  "Swimming Pool": Waves,
+  "Private Security": ShieldCheck,
+  "Parking Space": SquareParking,
+  "Podium Level": Trees,
+} as const;
 
 export function Amenities() {
   return (
@@ -153,29 +189,38 @@ export function Amenities() {
         <div className="max-w-2xl">
           <p className="eyebrow">Amenities</p>
           <h2 className="mt-3 font-display text-4xl leading-[1.08] sm:text-5xl">
-            Thoughtfully composed for life above the ordinary
+            Life above the ordinary
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Shared spaces are planned as part of the home, not as an afterthought — from the rooftop
-            down to the podium.
+            A temperature-controlled pool, private security, covered parking and an elevated podium
+            deck.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-          {AMENITIES.map((a, i) => (
-            <div
-              key={a.title}
-              className="group -mx-4 flex gap-5 rounded-md border-t border-border px-4 pt-6 transition-[background-color,border-color,box-shadow] duration-500 hover:border-gold/45 hover:bg-sand/55 hover:shadow-[var(--shadow-soft)]"
-            >
-              <span className="font-display text-2xl text-gold-deep/70 tabular-nums transition-colors duration-500 group-hover:text-gold-deep">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="min-w-0 transition-transform duration-500 group-hover:translate-x-1">
-                <h3 className="font-display text-xl leading-snug">{a.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
-              </div>
-            </div>
-          ))}
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {AMENITIES.map((a) => {
+            const Icon = AMENITY_ICONS[a.title as keyof typeof AMENITY_ICONS];
+            return (
+              <article
+                key={a.title}
+                className="group relative overflow-hidden rounded-md border border-border bg-card p-7 shadow-[var(--shadow-soft)] transition-shadow duration-700 hover:shadow-[var(--shadow-lift)]"
+              >
+                <span
+                  aria-hidden
+                  className="absolute inset-0 bg-sand/0 transition-colors duration-700 ease-out group-hover:bg-sand/80"
+                />
+                <span
+                  aria-hidden
+                  className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-[image:var(--gradient-gold)] transition-transform duration-700 ease-out group-hover:scale-x-100"
+                />
+                <div className="relative transition-transform duration-700 ease-out group-hover:translate-x-1">
+                  <Icon className="size-5 text-gold-deep" aria-hidden />
+                  <h3 className="mt-5 font-display text-xl leading-snug">{a.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -198,15 +243,14 @@ export function Investment() {
         <div className="max-w-2xl">
           <p className="eyebrow text-gold-light">Investment</p>
           <h2 className="mt-3 font-display text-4xl leading-[1.08] text-on-dark sm:text-5xl">
-            A flexible route to premium ownership
+            Flexible premium ownership
           </h2>
           <p className="mt-4 text-on-dark-muted/80">
-            Ownership is structured in four clear stages, with the full schedule issued in writing
-            before you commit.
+            Flexible 3-year payment plans, with dedicated rental management for overseas investors.
           </p>
         </div>
 
-        <ol className="mt-14 grid gap-px bg-on-dark/15 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-14 grid gap-px bg-on-dark/15 sm:grid-cols-2 lg:grid-cols-3">
           {PAYMENT_STEPS.map((s) => (
             <li key={s.step} className="bg-ink p-8">
               <span className="font-display text-3xl text-gold-light">{s.step}</span>
@@ -227,87 +271,20 @@ export function Investment() {
 
 /* ---------------- Construction progress ---------------- */
 
-function ConstructionMeters() {
-  const listRef = useRef<HTMLDListElement>(null);
-  const [ratio, setRatio] = useState(0);
-
-  useEffect(() => {
-    const node = listRef.current;
-    if (!node) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setRatio(1);
-      return;
-    }
-
-    let frame = 0;
-    const duration = 1200;
-    const play = (startedAt: number, now: number) => {
-      const t = Math.min(1, (now - startedAt) / duration);
-      setRatio(1 - (1 - t) ** 3);
-      if (t < 1) frame = requestAnimationFrame((next) => play(startedAt, next));
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-        frame = requestAnimationFrame((now) => play(now, now));
-      },
-      { threshold: 0.25 },
-    );
-
-    observer.observe(node);
-    return () => {
-      observer.disconnect();
-      cancelAnimationFrame(frame);
-    };
-  }, []);
-
-  return (
-    <dl ref={listRef} className="mt-10 space-y-7">
-      {PROGRESS_ITEMS.map((p) => (
-        <div key={p.label}>
-          <div className="flex items-baseline justify-between gap-4">
-            <dt className="min-w-0 truncate text-sm font-medium">{p.label}</dt>
-            <dd className="shrink-0 font-display text-lg text-gold-deep tabular-nums">
-              {Math.round(p.value * ratio)}%
-            </dd>
-          </div>
-          <div
-            className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-sand"
-            role="progressbar"
-            aria-valuenow={p.value}
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-label={p.label}
-          >
-            <div
-              className="h-full rounded-full bg-[image:var(--gradient-gold)]"
-              style={{ width: `${p.value * ratio}%` }}
-            />
-          </div>
-        </div>
-      ))}
-    </dl>
-  );
-}
-
 export function ConstructionProgress() {
   return (
     <section id="progress" className="py-24 lg:py-32">
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
         <div>
           <p className="eyebrow">Construction</p>
           <h2 className="mt-3 font-display text-4xl leading-[1.08] sm:text-5xl">
             Follow construction progress
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Work advances stage by stage, and we publish where each phase stands so buyers can track
-            the building as it rises.
+            Goldcrest Views is in progress. The seven towers are rising in Giga City, and the team
+            shares the latest site position on request.
           </p>
-
-          <ConstructionMeters />
+          {/* <p className="mt-6 font-display text-3xl text-gold-deep">In progress</p> */}
 
           <InquiryCta variant="goldOutline" className="mt-10">
             Request the latest site report
@@ -317,8 +294,8 @@ export function ConstructionProgress() {
         <figure className="lg:sticky lg:top-28">
           <div className="group relative overflow-hidden rounded-md shadow-[var(--shadow-lift)]">
             <img
-              src={construction}
-              alt="The Goldcrest Views structure under construction with a tower crane"
+              src="/gallery/views/v1-01.jpg"
+              alt="The Goldcrest Views towers under construction with tower cranes"
               width={1600}
               height={1104}
               loading="lazy"
@@ -340,11 +317,11 @@ export function ConstructionProgress() {
 export function Verification() {
   return (
     <section className="bg-background py-24 lg:py-32">
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
         <div className="max-w-lg">
           <p className="eyebrow">Due diligence</p>
           <h2 className="mt-3 font-display text-4xl leading-[1.08] sm:text-5xl">
-            Buy with confidence. Verify before you book.
+            Verify before you book
           </h2>
           <hr className="rule-gold my-7 max-w-24" />
           <p className="leading-relaxed text-muted-foreground">
@@ -386,8 +363,11 @@ export function Developer() {
         <div className="max-w-2xl">
           <p className="eyebrow">The developer</p>
           <h2 className="mt-3 font-display text-4xl leading-[1.08] sm:text-5xl">
-            Built on a cross-border legacy
+            A cross-border legacy
           </h2>
+          <p className="mt-4 text-muted-foreground">
+            Goldcrest Views is a landmark luxury residential project by Al-Ghurair Giga.
+          </p>
         </div>
         <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {DEVELOPER_PILLARS.map((d) => {
@@ -538,8 +518,8 @@ export function SiteFooter() {
             <span className="font-display text-lg font-semibold">Goldcrest Views</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            A high-rise residential address in Islamabad. Studio to three-bedroom apartments with
-            amenity floors and structured payment plans.
+            A luxury residential complex by Al-Ghurair Giga in Giga City, Islamabad. Studios to
+            4-bedroom apartments, penthouses and duplexes.
           </p>
         </div>
         <nav aria-label="Footer">
