@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Seven 40-storey towers by Al-Ghurair Giga in Giga City, Islamabad. Studios to 4-bedroom apartments, penthouses and duplexes.",
+          "Seven 40-storey towers by Al-Ghurair Giga in Giga City, Islamabad. Studios to 4-bedroom apartments with smart-home technology.",
       },
       { property: "og:title", content: "Goldcrest Views — Luxury residences in Giga City" },
       {

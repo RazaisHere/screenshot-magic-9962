@@ -35,7 +35,7 @@ export function Hero() {
               <span className="block text-gold-gradient">at Goldcrest Views</span>
             </h1>
             <p className="mt-2 max-w-xl text-sm leading-snug text-on-dark-muted/85 sm:text-base lg:mt-4 lg:text-lg lg:leading-relaxed">
-              Seven 40-storey towers in Giga City — studios, 1–4 bedroom apartments, penthouses and
+              Seven 40-storey towers in Giga City — studios, 1–4 bedroom apartments with smart-home technology and
               duplexes, with smart-home technology and world-class amenities.
             </p>
 

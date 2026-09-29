@@ -15,7 +15,7 @@ export const HIGHLIGHTS = [
   },
   {
     title: "Studios to duplexes",
-    body: "Studios, 1–4 bedroom apartments, penthouses and duplexes.",
+    body: "Studios, 1–4 bedroom apartments with smart-home technology.",
   },
   {
     title: "World-class amenities",
@@ -136,7 +136,7 @@ export const FAQS = [
   },
   {
     q: "What unit types are available?",
-    a: "Studios, 1 to 4 bedroom apartments, penthouses and duplexes, with smart-home technology in every home. The sales team confirms what is open for booking.",
+    a: "Studios, 1 to 4 bedroom apartments with smart-home technology in every home. The sales team confirms what is open for booking.",
   },
   {
     q: "Is a payment plan available?",

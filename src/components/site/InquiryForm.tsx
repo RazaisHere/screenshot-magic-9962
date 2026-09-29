@@ -32,8 +32,6 @@ const UNIT_TYPES = [
   "2 Bedroom",
   "3 Bedroom",
   "4 Bedroom",
-  "Penthouse",
-  "Duplex",
   "Not sure yet",
 ];
 

@@ -519,7 +519,7 @@ export function SiteFooter() {
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
             A luxury residential complex by Al-Ghurair Giga in Giga City, Islamabad. Studios to
-            4-bedroom apartments, penthouses and duplexes.
+            4-bedroom apartments with smart-home technology.
           </p>
         </div>
         <nav aria-label="Footer">

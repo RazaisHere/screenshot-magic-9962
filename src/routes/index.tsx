@@ -26,13 +26,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Seven 40-storey towers by Al-Ghurair Giga in Giga City, Islamabad. Studios to 4-bedroom apartments, penthouses and duplexes, with 3-year payment plans.",
+          "Seven 40-storey towers by Al-Ghurair Giga in Giga City, Islamabad. Studios to 4-bedroom apartments,  with 3-year payment plans.",
       },
       { property: "og:title", content: "Goldcrest Views — Luxury residences in Giga City" },
       {
         property: "og:description",
         content:
-          "A luxury residential complex beside Giga Mall. Studios, apartments, penthouses and duplexes.",
+          "A luxury residential complex beside Giga Mall. Studios, apartments with smart-home technology",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
