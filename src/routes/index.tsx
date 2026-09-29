@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav } from "@/components/site/SiteNav";
+import { InquiryModalProvider } from "@/components/site/InquiryModal";
 import { Hero } from "@/components/site/Hero";
 import { Gallery } from "@/components/site/Gallery";
 import {
@@ -42,25 +43,27 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background">
-      <SiteNav />
-      <main>
-        <Hero />
-        <Highlights />
-        <Location />
-        <Inspiration />
-        <Amenities />
-        <Investment />
-        <ConstructionProgress />
-        <Gallery />
-        <Verification />
-        <Developer />
-        <Experiences />
-        <Testimonials />
-        <Faq />
-        <ClosingCta />
-      </main>
-      <SiteFooter />
-    </div>
+    <InquiryModalProvider>
+      <div className="min-h-screen bg-background">
+        <SiteNav />
+        <main>
+          <Hero />
+          <Highlights />
+          <Location />
+          <Inspiration />
+          <Amenities />
+          <Investment />
+          <ConstructionProgress />
+          <Gallery />
+          <Verification />
+          <Developer />
+          <Experiences />
+          <Testimonials />
+          <Faq />
+          <ClosingCta />
+        </main>
+        <SiteFooter />
+      </div>
+    </InquiryModalProvider>
   );
 }

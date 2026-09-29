@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import {
   AMENITIES,
   DEVELOPER_PILLARS,
@@ -10,6 +11,7 @@ import {
   VERIFICATION_POINTS,
 } from "./content";
 import { Button } from "@/components/ui/button";
+import { useInquiryModal } from "./InquiryModal";
 import {
   Accordion,
   AccordionContent,
@@ -20,6 +22,25 @@ import { Check, Quote, Sparkles } from "lucide-react";
 import facade from "@/assets/facade.jpg";
 import interior from "@/assets/interior.jpg";
 import construction from "@/assets/construction.jpg";
+
+function InquiryCta({
+  children,
+  variant,
+  size = "xl",
+  className,
+}: {
+  children: ReactNode;
+  variant: "gold" | "goldOutline";
+  size?: "lg" | "xl";
+  className?: string;
+}) {
+  const { openInquiry } = useInquiryModal();
+  return (
+    <Button type="button" variant={variant} size={size} className={className} onClick={openInquiry}>
+      {children}
+    </Button>
+  );
+}
 
 /* ---------------- Highlights ---------------- */
 
@@ -56,7 +77,28 @@ export function Location() {
   return (
     <section id="location" className="py-24 lg:py-32">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
-        <div className="max-w-xl">
+        <figure className="relative">
+          <div className="group relative overflow-hidden rounded-md shadow-[var(--shadow-lift)]">
+            <img
+              src={facade}
+              alt="Curved balconies and warm stone detailing on the tower facade"
+              width={1280}
+              height={1600}
+              loading="lazy"
+              className="aspect-[4/5] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,oklch(0.18_0.02_70/0.28),transparent_42%)]"
+            />
+          </div>
+  
+          <div
+            aria-hidden
+            className="absolute -top-5 -right-5 -z-10 hidden h-40 w-40 rounded-md bg-[image:var(--gradient-gold)] opacity-25 lg:block"
+          />
+        </figure>
+        <div className="max-w-xl lg:justify-self-end">
           <p className="eyebrow">Location</p>
           <h2 className="mt-3 font-display text-4xl leading-[1.08] sm:text-5xl">
             A landmark address in Islamabad&rsquo;s evolving skyline
@@ -71,27 +113,10 @@ export function Location() {
             The result is an address that keeps the calm of the capital close, while putting daily
             conveniences within a short journey of your front door.
           </p>
-          <Button variant="goldOutline" size="xl" className="mt-9" asChild>
-            <a href="#inquiry">Request the location map</a>
-          </Button>
+          <InquiryCta variant="goldOutline" className="mt-9">
+            Request the location map
+          </InquiryCta>
         </div>
-        <figure className="relative">
-          <img
-            src={facade}
-            alt="Curved balconies and warm stone detailing on the tower facade"
-            width={1280}
-            height={1600}
-            loading="lazy"
-            className="aspect-[4/5] w-full rounded-md object-cover shadow-[var(--shadow-lift)]"
-          />
-          <figcaption className="mt-3 text-xs text-muted-foreground">
-            Facade study — balcony depth and glazing across the tower elevation.
-          </figcaption>
-          <div
-            aria-hidden
-            className="absolute -top-5 -left-5 -z-10 hidden h-40 w-40 rounded-md bg-[image:var(--gradient-gold)] opacity-25 lg:block"
-          />
-        </figure>
       </div>
     </section>
   );
@@ -113,9 +138,7 @@ export function Inspiration() {
           balconies, amenity floors that residents actually use — and adapts it to the light,
           climate and family rhythms of Islamabad.
         </p>
-        <p className="mt-6 text-sm text-muted-foreground">
-          The outcome is a building that feels international without ever feeling imported.
-        </p>
+     
       </div>
     </section>
   );
@@ -191,12 +214,8 @@ export function Investment() {
         </ol>
 
         <div className="mt-12 flex flex-wrap items-center gap-4">
-          <Button variant="gold" size="xl" asChild>
-            <a href="#inquiry">Get the payment plan</a>
-          </Button>
-          <p className="text-sm text-on-dark-muted/70">
-            Plans vary by unit type and floor. Ask us for your options.
-          </p>
+          <InquiryCta variant="gold">Get the payment plan</InquiryCta>
+         
         </div>
       </div>
     </section>
@@ -245,9 +264,9 @@ export function ConstructionProgress() {
             ))}
           </dl>
 
-          <Button variant="goldOutline" size="xl" className="mt-10" asChild>
-            <a href="#inquiry">Request the latest site report</a>
-          </Button>
+          <InquiryCta variant="goldOutline" className="mt-10">
+            Request the latest site report
+          </InquiryCta>
         </div>
 
         <figure className="lg:sticky lg:top-28">
@@ -259,9 +278,7 @@ export function ConstructionProgress() {
             loading="lazy"
             className="aspect-[4/3] w-full rounded-md object-cover shadow-[var(--shadow-lift)]"
           />
-          <figcaption className="mt-3 text-xs text-muted-foreground">
-            On-site progress. Updated photography is shared with buyers at each milestone.
-          </figcaption>
+       
         </figure>
       </div>
     </section>
@@ -284,9 +301,9 @@ export function Verification() {
             A serious purchase deserves serious checks. We encourage every buyer to confirm the
             project&rsquo;s documentation independently — and we provide what you need to do it.
           </p>
-          <Button variant="gold" size="xl" className="mt-9" asChild>
-            <a href="#inquiry">Request the documents</a>
-          </Button>
+          <InquiryCta variant="gold" className="mt-9">
+            Request the documents
+          </InquiryCta>
         </div>
 
         <ul className="surface-card rounded-md p-8">
@@ -352,9 +369,9 @@ export function Experiences() {
             </article>
           ))}
         </div>
-        <Button variant="goldOutline" size="xl" className="mt-10" asChild>
-          <a href="#inquiry">Schedule a visit</a>
-        </Button>
+        <InquiryCta variant="goldOutline" className="mt-10">
+          Schedule a visit
+        </InquiryCta>
       </div>
     </section>
   );
@@ -436,9 +453,9 @@ export function ClosingCta() {
         <p className="mt-4 text-on-dark-muted/80">
           Share your details and our team will come back with availability, floor plans and pricing.
         </p>
-        <Button variant="gold" size="xl" className="mt-9" asChild>
-          <a href="#inquiry">Request an appointment</a>
-        </Button>
+        <InquiryCta variant="gold" className="mt-9">
+          Request an appointment
+        </InquiryCta>
       </div>
     </section>
   );
@@ -450,7 +467,13 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
-            <span aria-hidden className="h-7 w-7 rounded-full bg-[image:var(--gradient-gold)]" />
+            <img
+              src="/logo.svg"
+              alt=""
+              width={44}
+              height={44}
+              className="size-11 shrink-0"
+            />
             <span className="font-display text-lg font-semibold">Goldcrest Views</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
@@ -479,15 +502,14 @@ export function SiteFooter() {
             Use the inquiry form and our sales team will respond with current availability and
             pricing.
           </p>
-          <Button variant="goldOutline" size="lg" className="mt-5 text-xs" asChild>
-            <a href="#inquiry">Contact the team</a>
-          </Button>
+          <InquiryCta variant="goldOutline" size="lg" className="mt-5 text-xs">
+            Contact the team
+          </InquiryCta>
         </div>
       </div>
       <div className="mx-auto mt-12 max-w-7xl px-5 sm:px-8">
-        <p className="border-t border-border pt-6 text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Goldcrest Views. Renders and imagery are indicative.
-          Specifications, availability and payment terms are confirmed in writing at booking.
+        <p className="border-t border-border pt-6 text-xs text-muted-foreground text-center">
+          © {new Date().getFullYear()} Goldcrest Views.
         </p>
       </div>
     </footer>

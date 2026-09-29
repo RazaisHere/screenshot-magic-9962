@@ -31,25 +31,40 @@ export function InquiryModalProvider({ children }: { children: ReactNode }) {
     setState((s) => (s === "open" ? "closing" : s));
   }, []);
 
+  const locked = state !== "closed";
+
   // Scroll lock, Escape-to-close and initial focus while the modal is mounted.
+  // Padding replaces the scrollbar so the page does not shift sideways.
   useEffect(() => {
-    if (state === "closed") return;
+    if (!locked) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
     };
     document.addEventListener("keydown", onKey);
+
+    const scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
     const prevOverflow = document.body.style.overflow;
+    const prevPaddingRight = document.body.style.paddingRight;
+    const root = document.documentElement;
+    const prevComp = root.style.getPropertyValue("--scrollbar-comp");
+
     document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    root.style.setProperty("--scrollbar-comp", `${scrollbarWidth}px`);
     closeBtnRef.current?.focus();
+
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
+      document.body.style.paddingRight = prevPaddingRight;
+      if (prevComp) root.style.setProperty("--scrollbar-comp", prevComp);
+      else root.style.removeProperty("--scrollbar-comp");
     };
-  }, [state, close]);
+  }, [locked, close]);
 
   useEffect(() => {
     if (state !== "closing") return;
-    const t = setTimeout(() => setState("closed"), 190);
+    const t = setTimeout(() => setState("closed"), 260);
     return () => clearTimeout(t);
   }, [state]);
 
@@ -61,7 +76,7 @@ export function InquiryModalProvider({ children }: { children: ReactNode }) {
       {state !== "closed" && (
         <div
           className={cn(
-            "fixed inset-0 z-[100] overflow-y-auto bg-ink/60 backdrop-blur-sm",
+            "fixed inset-0 z-[100] overflow-y-auto bg-ink/60 pr-(--scrollbar-comp) backdrop-blur-sm",
             closing ? "modal-backdrop-out" : "modal-backdrop-in",
           )}
           onClick={close}

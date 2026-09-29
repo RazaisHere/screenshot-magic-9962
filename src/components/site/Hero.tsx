@@ -1,6 +1,7 @@
 import { ArrowDown, MapPin, Building2, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { InquiryForm } from "./InquiryForm";
+import { useInquiryModal } from "./InquiryModal";
 import heroTower from "@/assets/hero-tower.jpg";
 
 const STATS = [
@@ -10,6 +11,8 @@ const STATS = [
 ];
 
 export function Hero() {
+  const { openInquiry } = useInquiryModal();
+
   return (
     <section id="top" className="relative isolate overflow-hidden">
       <img
@@ -37,14 +40,14 @@ export function Hero() {
               the way Islamabad is growing upward.
             </p>
 
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Button variant="gold" size="xl" asChild>
-                <a href="#inquiry">Book a viewing</a>
+            <div className="mt-9 grid w-full max-w-md grid-cols-1 gap-3 sm:inline-grid sm:w-max sm:max-w-none sm:grid-cols-2">
+              <Button variant="gold" size="xl" type="button" className="w-full" onClick={openInquiry}>
+                Book a viewing
               </Button>
               <Button
                 variant="goldOutline"
                 size="xl"
-                className="border-on-dark/40 text-on-dark hover:bg-on-dark/10"
+                className="w-full border-on-dark/40 text-on-dark hover:bg-on-dark/10"
                 asChild
               >
                 <a href="#gallery">Explore the gallery</a>
