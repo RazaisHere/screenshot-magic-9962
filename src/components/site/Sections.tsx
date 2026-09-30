@@ -9,6 +9,7 @@ import {
 } from "./content";
 import { Button } from "@/components/ui/button";
 import { useInquiryModal } from "./InquiryModal";
+import { MobileCardCarousel } from "./MobileCardCarousel";
 import {
   Accordion,
   AccordionContent,
@@ -320,7 +321,15 @@ export function Experiences() {
             Four ways to get to know the project — in person or from anywhere in the world.
           </p>
         </div>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <MobileCardCarousel label="Experiences at Goldcrest Views">
+          {EXPERIENCES.map((e) => (
+            <article key={e.title} className="surface-card h-full rounded-md p-7">
+              <h3 className="font-display text-xl">{e.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{e.body}</p>
+            </article>
+          ))}
+        </MobileCardCarousel>
+        <div className="mt-12 hidden gap-4 sm:grid-cols-2 md:grid lg:grid-cols-4">
           {EXPERIENCES.map((e) => (
             <article key={e.title} className="surface-card rounded-md p-7">
               <h3 className="font-display text-xl">{e.title}</h3>
@@ -348,7 +357,23 @@ export function Testimonials() {
             What happy customers say
           </h2>
         </div>
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <MobileCardCarousel label="What happy customers say">
+          {TESTIMONIALS.map((t) => (
+            <figure key={t.name} className="surface-card flex h-full flex-col rounded-md p-8">
+              <Quote className="size-6 text-gold" aria-hidden />
+              <blockquote className="mt-5 flex-1 font-display text-xl leading-snug">
+                &ldquo;{t.quote}&rdquo;
+              </blockquote>
+              <figcaption className="mt-6 border-t border-border pt-4">
+                <span className="block text-sm font-medium">{t.name}</span>
+                <span className="block text-xs tracking-[0.14em] text-muted-foreground uppercase">
+                  {t.role}
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </MobileCardCarousel>
+        <div className="mt-12 hidden gap-6 md:grid lg:grid-cols-3">
           {TESTIMONIALS.map((t) => (
             <figure key={t.name} className="surface-card flex flex-col rounded-md p-8">
               <Quote className="size-6 text-gold" aria-hidden />

@@ -85,32 +85,34 @@ export function InquiryModalProvider({ children }: { children: ReactNode }) {
             <div
               role="dialog"
               aria-modal="true"
-              aria-label="Request an appointment"
+              aria-label="Request current pricing"
               onClick={(e) => e.stopPropagation()}
               className={cn(
-                "relative w-full max-w-[460px] rounded-[0.7rem] border border-border bg-card shadow-[var(--shadow-lift)]",
+                "relative w-full max-w-lg overflow-hidden rounded-[1.25rem] border border-gold/35 bg-ink text-on-dark shadow-[0_28px_80px_oklch(0_0_0/0.5)]",
                 closing ? "modal-panel-out" : "modal-panel-in",
               )}
             >
+              <div aria-hidden className="h-px bg-[image:var(--gradient-gold)]" />
               <button
                 ref={closeBtnRef}
                 type="button"
                 aria-label="Close inquiry form"
                 onClick={close}
-                className="absolute top-3 right-3 z-10 grid size-9 place-items-center rounded-full border border-border bg-background/85 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="absolute top-4 right-4 z-10 grid size-9 place-items-center rounded-full border border-gold/40 text-on-dark transition-colors hover:bg-on-dark/10"
               >
                 <X className="size-4" aria-hidden />
               </button>
-              <div className="max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 sm:p-8">
-                <p className="eyebrow hidden text-center lg:block">Private consultation</p>
-                <h2 className="text-center font-display text-xl sm:text-2xl lg:mt-2">
+              <div className="max-h-[calc(100dvh-2rem)] overflow-y-auto px-5 pt-8 pb-6 sm:px-8 sm:pt-10 sm:pb-8">
+                <p className="eyebrow text-center text-gold-light">Private consultation</p>
+                <h2 className="mt-2 text-center font-display text-[2rem] leading-none text-on-dark sm:text-4xl">
                   Request current pricing
                 </h2>
-                <p className="mt-2 mb-6 text-sm text-muted-foreground">
+                <p className="mx-auto mt-3 max-w-sm text-center font-sans text-sm leading-relaxed text-on-dark-muted">
                   Share a few details and our team will send availability, floor plans and the
                   current payment plan.
                 </p>
-                <InquiryForm />
+                <div aria-hidden className="mx-auto mt-5 mb-6 h-px w-16 bg-[image:var(--gradient-gold)]" />
+                <InquiryForm tone="onImage" />
               </div>
             </div>
           </div>

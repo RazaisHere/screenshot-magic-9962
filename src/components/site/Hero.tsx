@@ -1,15 +1,56 @@
-import { Button } from "@/components/ui/button";
 import { InquiryForm } from "./InquiryForm";
+
+const awards = [
+  {
+    src: "/best%20develpers.png",
+    alt: "Luxury Lifestyle Awards 2026: Giga Group of Companies, Best Luxury Real Estate Developer, Pakistan",
+  },
+  {
+    src: "/BestLuxuryLifeStyle.png",
+    alt: "Luxury Lifestyle Awards 2026: Giga Group of Companies, Best Luxury High Rise Living, Pakistan",
+  },
+  {
+    src: "/BestLuxuryCommercial.png",
+    alt: "Luxury Lifestyle Awards 2026: Giga Group of Companies, Best Luxury Commercial Development, Pakistan",
+  },
+];
+
+function HeroAwards({ className = "", stacked = false }: { className?: string; stacked?: boolean }) {
+  const images = awards.map((award) => (
+    <img
+      key={award.src}
+      src={award.src}
+      alt={award.alt}
+      width={1078}
+      height={430}
+      className={stacked ? "h-auto w-full object-contain" : "h-auto min-w-0 flex-1 object-contain"}
+    />
+  ));
+
+  if (stacked) {
+    return (
+      <div className={`grid grid-cols-2 gap-2 ${className}`}>
+        {images[0]}
+        {images[1]}
+        <div className="col-span-2 flex justify-center">
+          <div className="w-[calc(50%-0.25rem)]">{images[2]}</div>
+        </div>
+      </div>
+    );
+  }
+
+  return <div className={`flex items-center gap-2 ${className}`}>{images}</div>;
+}
 
 export function Hero() {
 
   return (
     <section id="top" className="relative isolate flex h-svh flex-col overflow-hidden">
       <img
-        src="/AwardBGWebsite1920x1080.jpg.jpeg"
-        alt="Luxury Lifestyle Awards 2026 trophy for Giga Group of Companies"
-        width={1920}
-        height={1080}
+        src="/WhatsApp%20Image%202026-09-30%20at%2012.59.20%20PM.jpeg"
+        alt="Goldcrest Views towers lit at night above the Islamabad skyline"
+        width={1600}
+        height={827}
         className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
       />
       <div
@@ -28,16 +69,7 @@ export function Hero() {
               Seven 40-storey towers in the heart of Giga City, from studios to duplexes beside Giga Mall.
             </p>
 
-            <div className="mt-3 lg:mt-4">
-              <Button
-                variant="goldOutline"
-                size="lg"
-                className="border-on-dark/40 text-on-dark hover:bg-on-dark/10 lg:h-12 lg:text-base"
-                asChild
-              >
-                <a href="#gallery">Explore the gallery</a>
-              </Button>
-            </div>
+            <HeroAwards className="mt-4 max-w-xl" />
           </div>
 
           <h1 className="hero-mobile-title reveal-up text-center font-display text-[clamp(2.15rem,10vw,3rem)] leading-none text-on-dark lg:hidden">
@@ -48,12 +80,14 @@ export function Hero() {
             id="inquiry"
             className="hero-inquiry reveal-up scroll-mt-28 rounded-[0.7rem] border p-3 sm:p-5 lg:self-center lg:p-6"
           >
-            <p className="eyebrow hidden text-center lg:block">Private consultation</p>
+            <p className="eyebrow hidden text-center text-gold-light lg:block">Private consultation</p>
             <h2 className="mb-4 text-center font-display text-xl text-on-dark sm:text-2xl lg:mt-1">
               Request current pricing
             </h2>
             <InquiryForm tone="onImage" compact />
           </div>
+
+          <HeroAwards stacked className="mx-auto w-full max-w-md lg:hidden" />
         </div>
       </div>
     </section>

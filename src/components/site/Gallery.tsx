@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { MobileCardCarousel } from "./MobileCardCarousel";
 import { GALLERY_CATEGORIES, type GalleryCategory } from "./content";
 
 type Shot = {
@@ -63,6 +64,37 @@ export function Gallery() {
   const [lightbox, setLightbox] = useState<LightboxState>("closed");
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const shots = active === "All" ? SHOTS : SHOTS.filter((s) => s.category === active);
+
+  const shotCard = (shot: Shot, index: number, mosaic: boolean) => (
+    <button
+      key={`${shot.alt}-${index}`}
+      type="button"
+      onClick={() => openShot(shot)}
+      className={cn(
+        "group relative h-[240px] w-full cursor-pointer overflow-hidden rounded-md bg-muted text-left md:h-full",
+        mosaic && active === "All" ? shot.span : undefined,
+      )}
+    >
+      <img
+        src={shot.src}
+        alt=""
+        loading="lazy"
+        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+      />
+      <span
+        className={cn(
+          "absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,oklch(0.18_0.02_70/0.82),transparent)] p-4 text-xs text-[oklch(0.99_0.005_90)] transition-opacity duration-300",
+          mosaic ? "opacity-0 group-hover:opacity-100" : "opacity-100",
+        )}
+      >
+        <span className="block text-[0.6rem] tracking-[0.2em] uppercase opacity-80">
+          {shot.category}
+        </span>
+        {shot.alt}
+      </span>
+      <span className="sr-only">Open image: {shot.alt}</span>
+    </button>
+  );
 
   const openShot = (shot: Shot) => {
     setSelected(shot);
@@ -145,32 +177,12 @@ export function Gallery() {
           ))}
         </div>
 
-        <div className="mt-8 grid auto-rows-[220px] grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 md:auto-rows-[240px]">
-          {shots.map((s, i) => (
-            <button
-              key={`${s.alt}-${i}`}
-              type="button"
-              onClick={() => openShot(s)}
-              className={cn(
-                "group relative cursor-pointer overflow-hidden rounded-md bg-muted text-left",
-                active === "All" ? s.span : undefined,
-              )}
-            >
-              <img
-                src={s.src}
-                alt=""
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
-              />
-              <span className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,oklch(0.18_0.02_70/0.82),transparent)] p-4 text-xs text-[oklch(0.99_0.005_90)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <span className="block text-[0.6rem] tracking-[0.2em] uppercase opacity-80">
-                  {s.category}
-                </span>
-                {s.alt}
-              </span>
-              <span className="sr-only">Open image: {s.alt}</span>
-            </button>
-          ))}
+        <MobileCardCarousel key={active} label="Views of the towers">
+          {shots.map((shot, index) => shotCard(shot, index, false))}
+        </MobileCardCarousel>
+
+        <div className="mt-8 hidden auto-rows-[220px] grid-cols-1 gap-4 sm:grid-cols-2 md:grid md:auto-rows-[240px] md:grid-cols-4">
+          {shots.map((shot, index) => shotCard(shot, index, true))}
         </div>
       </div>
 

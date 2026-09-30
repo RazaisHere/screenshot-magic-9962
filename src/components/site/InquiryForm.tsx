@@ -2,7 +2,7 @@ import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { Calendar, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -21,6 +21,7 @@ function todayIso() {
 function isTodayOrFuture(value: string) {
   if (!isoDate.test(value)) return false;
   const [year, month, day] = value.split("-").map(Number);
+  if (year === undefined || month === undefined || day === undefined) return false;
   const picked = new Date(year, month - 1, day);
   if (picked.getFullYear() !== year || picked.getMonth() !== month - 1 || picked.getDate() !== day) {
     return false;
@@ -92,7 +93,7 @@ export function InquiryForm({
   const fieldBase = cn(
     "rounded-[0.45rem] font-sans text-sm font-normal tracking-normal placeholder:font-sans focus-visible:ring-2 focus-visible:ring-gold",
     tone === "onImage"
-      ? "border-white/22 bg-white/[0.07] text-on-dark placeholder:text-on-dark/55"
+      ? "border-white/30 bg-white/[0.08] text-on-dark placeholder:text-on-dark/70"
       : "border-input bg-background/95 placeholder:text-muted-foreground/70",
     compact ? "h-9" : "h-11",
   );
@@ -100,7 +101,7 @@ export function InquiryForm({
   const labelCls = cn(
     "block font-sans font-medium tracking-[0.14em] uppercase",
     compact ? "mb-1 text-[0.62rem]" : "mb-1.5 text-[0.7rem]",
-    tone === "onImage" ? "text-on-dark/80" : "text-muted-foreground",
+    tone === "onImage" ? "text-on-dark/90" : "text-muted-foreground",
   );
 
   const Err = ({ name }: { name: keyof FormValues }) =>
@@ -219,23 +220,32 @@ export function InquiryForm({
           <Label htmlFor={`${fieldId}-visitDate`} className={labelCls}>
             Expected visit date
           </Label>
-          <Input
-            id={`${fieldId}-visitDate`}
-            type="date"
-            required
-            min={todayIso()}
-            aria-invalid={!!errors.visitDate}
-            aria-describedby={errors.visitDate ? `${fieldId}-visitDate-error` : undefined}
-            className={cn(fieldBase, "visit-date w-full", tone === "onImage" && "visit-date-on-image")}
-            {...register("visitDate")}
-          />
+          <div className="relative">
+            <Input
+              id={`${fieldId}-visitDate`}
+              type="date"
+              required
+              min={todayIso()}
+              aria-invalid={!!errors.visitDate}
+              aria-describedby={errors.visitDate ? `${fieldId}-visitDate-error` : undefined}
+              className={cn(fieldBase, "visit-date w-full", tone === "onImage" && "visit-date-on-image")}
+              {...register("visitDate")}
+            />
+            <Calendar
+              aria-hidden
+              className={cn(
+                "pointer-events-none absolute top-1/2 right-2 size-4 -translate-y-1/2",
+                tone === "onImage" ? "text-white" : "text-foreground/70",
+              )}
+            />
+          </div>
           <Err name="visitDate" />
         </div>
       </div>
 
       <div className="min-w-0">
         <Label htmlFor={`${fieldId}-message`} className={labelCls}>
-          Optional message
+          Message
         </Label>
         <Textarea
           id={`${fieldId}-message`}
@@ -244,7 +254,7 @@ export function InquiryForm({
           className={cn(
             "resize-none rounded-[0.45rem] font-sans text-sm font-normal tracking-normal focus-visible:ring-2 focus-visible:ring-gold",
             tone === "onImage"
-              ? "border-white/22 bg-white/[0.07] text-on-dark placeholder:text-on-dark/55"
+              ? "border-white/30 bg-white/[0.08] text-on-dark placeholder:text-on-dark/70"
               : "border-input bg-background/95",
           )}
           {...register("message")}
@@ -253,7 +263,7 @@ export function InquiryForm({
       </div>
 
       {status === "error" && (
-        <p role="alert" className="text-sm text-destructive">
+        <p role="alert" className={cn("text-sm", tone === "onImage" ? "text-gold-light" : "text-destructive")}>
           Something went wrong sending your inquiry. Please try again.
         </p>
       )}
