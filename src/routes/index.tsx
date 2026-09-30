@@ -10,8 +10,6 @@ import {
   Amenities,
   Investment,
   ConstructionProgress,
-  Verification,
-  Developer,
   Experiences,
   Testimonials,
   Faq,
@@ -55,8 +53,6 @@ function Index() {
           <Investment />
           <ConstructionProgress />
           <Gallery />
-          <Verification />
-          <Developer />
           <Experiences />
           <Testimonials />
           <Faq />

@@ -10,6 +10,26 @@ import { Label } from "@/components/ui/label";
 import { submitInquiry } from "@/lib/inquiry-sheet";
 import { cn } from "@/lib/utils";
 
+const isoDate = /^\d{4}-\d{2}-\d{2}$/;
+
+function todayIso() {
+  const now = new Date();
+  const local = new Date(now.getTime() - now.getTimezoneOffset() * 60_000);
+  return local.toISOString().slice(0, 10);
+}
+
+function isTodayOrFuture(value: string) {
+  if (!isoDate.test(value)) return false;
+  const [year, month, day] = value.split("-").map(Number);
+  const picked = new Date(year, month - 1, day);
+  if (picked.getFullYear() !== year || picked.getMonth() !== month - 1 || picked.getDate() !== day) {
+    return false;
+  }
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return picked >= today;
+}
+
 const schema = z.object({
   fullName: z.string().trim().min(2, "Please enter your full name").max(80),
   phone: z
@@ -18,22 +38,17 @@ const schema = z.object({
     .min(7, "Please enter a valid phone number")
     .max(24)
     .regex(/^[+()\-\s\d]+$/, "Please enter a valid phone number"),
+  visitDate: z
+    .string()
+    .trim()
+    .min(1, "Please choose a visit date")
+    .refine(isTodayOrFuture, "Please choose today or a future date"),
   email: z.string().trim().email("Please enter a valid email address").max(120),
   cityCountry: z.string().trim().min(2, "Please enter your city or country").max(80),
-  unitType: z.string().min(1, "Please choose a unit type"),
   message: z.string().trim().max(600).optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
-
-const UNIT_TYPES = [
-  "Studio",
-  "1 Bedroom",
-  "2 Bedroom",
-  "3 Bedroom",
-  "4 Bedroom",
-  "Not sure yet",
-];
 
 export function InquiryForm({
   tone = "light",
@@ -49,15 +64,16 @@ export function InquiryForm({
     register,
     handleSubmit,
     reset,
+    setFocus,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       fullName: "",
       phone: "",
+      visitDate: "",
       email: "",
       cityCountry: "",
-      unitType: "",
       message: "",
     },
   });
@@ -74,32 +90,56 @@ export function InquiryForm({
   };
 
   const fieldBase = cn(
-    "rounded-sm border-input bg-background/95 text-sm placeholder:text-muted-foreground/70 focus-visible:ring-2 focus-visible:ring-gold",
+    "rounded-sm font-sans text-sm font-normal tracking-normal placeholder:font-sans focus-visible:ring-2 focus-visible:ring-gold",
+    tone === "onImage"
+      ? "border-white/30 bg-white/10 text-on-dark placeholder:text-on-dark/55"
+      : "border-input bg-background/95 placeholder:text-muted-foreground/70",
     compact ? "h-9" : "h-11",
   );
 
   const labelCls = cn(
-    "block tracking-[0.14em] uppercase",
+    "block font-sans font-medium tracking-[0.14em] uppercase",
     compact ? "mb-1 text-[0.62rem]" : "mb-1.5 text-[0.7rem]",
-    tone === "onImage" ? "text-foreground/70" : "text-muted-foreground",
+    tone === "onImage" ? "text-on-dark/80" : "text-muted-foreground",
   );
 
   const Err = ({ name }: { name: keyof FormValues }) =>
     errors[name] ? (
-      <p role="alert" className="mt-1 text-xs text-destructive">
+      <p
+        id={`${fieldId}-${name}-error`}
+        role="alert"
+        className={cn("mt-1 text-xs", tone === "onImage" ? "text-gold-light" : "text-destructive")}
+      >
         {errors[name]?.message as string}
       </p>
     ) : null;
 
+  const onInvalid = (fieldErrors: Partial<Record<keyof FormValues, unknown>>) => {
+    const first = (Object.keys(fieldErrors) as (keyof FormValues)[])[0];
+    if (first) setFocus(first);
+  };
+
   if (status === "success") {
     return (
       <div className={cn("flex flex-col items-center gap-4 px-2 text-center", compact ? "py-6" : "py-14")}>
-        <CheckCircle2 className="size-10 text-gold-deep" />
-        <h3 className="font-display text-2xl">Thank you — we have your details</h3>
-        <p className="max-w-sm text-sm text-muted-foreground">
+        <CheckCircle2 className={cn("size-10", tone === "onImage" ? "text-gold-light" : "text-gold-deep")} />
+        <h3 className={cn("font-display text-2xl", tone === "onImage" && "text-on-dark")}>
+          Thank you — we have your details
+        </h3>
+        <p
+          className={cn(
+            "max-w-sm font-sans text-sm",
+            tone === "onImage" ? "text-on-dark-muted" : "text-muted-foreground",
+          )}
+        >
           A member of the Goldcrest Views team will contact you shortly to arrange your appointment.
         </p>
-        <Button variant="goldOutline" size="lg" onClick={() => setStatus("idle")}>
+        <Button
+          variant="goldOutline"
+          size="lg"
+          className={tone === "onImage" ? "border-gold-light/80 text-on-dark hover:bg-on-dark/10" : ""}
+          onClick={() => setStatus("idle")}
+        >
           Send another inquiry
         </Button>
       </div>
@@ -107,7 +147,11 @@ export function InquiryForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className={compact ? "space-y-2" : "space-y-4"}>
+    <form
+      onSubmit={handleSubmit(onSubmit, onInvalid)}
+      noValidate
+      className={compact ? "space-y-2" : "space-y-4"}
+    >
       <div className={cn("grid", compact ? "grid-cols-2 gap-2" : "gap-4 sm:grid-cols-2")}>
         <div className="min-w-0">
           <Label htmlFor={`${fieldId}-fullName`} className={labelCls}>
@@ -140,22 +184,23 @@ export function InquiryForm({
         </div>
       </div>
 
+      <div className="min-w-0">
+        <Label htmlFor={`${fieldId}-email`} className={labelCls}>
+          Email
+        </Label>
+        <Input
+          id={`${fieldId}-email`}
+          type="email"
+          placeholder="you@example.com"
+          autoComplete="email"
+          aria-invalid={!!errors.email}
+          className={cn(fieldBase, "w-full")}
+          {...register("email")}
+        />
+        <Err name="email" />
+      </div>
+
       <div className={cn("grid", compact ? "grid-cols-2 gap-2" : "gap-4 sm:grid-cols-2")}>
-        <div className="min-w-0">
-          <Label htmlFor={`${fieldId}-email`} className={labelCls}>
-            Email
-          </Label>
-          <Input
-            id={`${fieldId}-email`}
-            type="email"
-            placeholder="you@example.com"
-            autoComplete="email"
-            aria-invalid={!!errors.email}
-            className={fieldBase}
-            {...register("email")}
-          />
-          <Err name="email" />
-        </div>
         <div className="min-w-0">
           <Label htmlFor={`${fieldId}-cityCountry`} className={labelCls}>
             City/Country
@@ -170,31 +215,25 @@ export function InquiryForm({
           />
           <Err name="cityCountry" />
         </div>
-        <div className="col-span-2 min-w-0">
-          <Label htmlFor={`${fieldId}-unitType`} className={labelCls}>
-            Preferred unit type
+        <div className="min-w-0">
+          <Label htmlFor={`${fieldId}-visitDate`} className={labelCls}>
+            Expected visit date
           </Label>
-          <select
-            id={`${fieldId}-unitType`}
-            aria-invalid={!!errors.unitType}
-            className={cn(
-              fieldBase,
-              "w-full border px-3 outline-none focus-visible:ring-2 focus-visible:ring-gold",
-            )}
-            {...register("unitType")}
-          >
-            <option value="">Select a layout</option>
-            {UNIT_TYPES.map((u) => (
-              <option key={u} value={u}>
-                {u}
-              </option>
-            ))}
-          </select>
-          <Err name="unitType" />
+          <Input
+            id={`${fieldId}-visitDate`}
+            type="date"
+            required
+            min={todayIso()}
+            aria-invalid={!!errors.visitDate}
+            aria-describedby={errors.visitDate ? `${fieldId}-visitDate-error` : undefined}
+            className={cn(fieldBase, "visit-date w-full", tone === "onImage" && "visit-date-on-image")}
+            {...register("visitDate")}
+          />
+          <Err name="visitDate" />
         </div>
       </div>
 
-      <div className={cn("min-w-0", compact && "max-sm:hidden")}>
+      <div className="min-w-0">
         <Label htmlFor={`${fieldId}-message`} className={labelCls}>
           Optional message
         </Label>
@@ -202,7 +241,12 @@ export function InquiryForm({
           id={`${fieldId}-message`}
           rows={compact ? 2 : 3}
           placeholder="Tell us what you're looking for"
-          className="resize-none rounded-sm border-input bg-background/95 text-sm focus-visible:ring-2 focus-visible:ring-gold"
+          className={cn(
+            "resize-none rounded-sm font-sans text-sm font-normal tracking-normal focus-visible:ring-2 focus-visible:ring-gold",
+            tone === "onImage"
+              ? "border-white/30 bg-white/10 text-on-dark placeholder:text-on-dark/55"
+              : "border-input bg-background/95",
+          )}
           {...register("message")}
         />
         <Err name="message" />
@@ -219,10 +263,10 @@ export function InquiryForm({
         variant="gold"
         size={compact ? "default" : "xl"}
         disabled={isSubmitting}
-        className="w-full"
+        className="w-full font-sans"
       >
         {isSubmitting && <Loader2 className="size-4 animate-spin" />}
-        {isSubmitting ? "Sending" : "Request an appointment"}
+        {isSubmitting ? "Sending" : "Send Inquiry"}
       </Button>
 
     

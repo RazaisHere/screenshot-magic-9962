@@ -7,9 +7,9 @@ export const INQUIRY_SHEET_URL = "https://script.google.com/macros/s/AKfycbwM6nw
 export type InquiryPayload = {
   fullName: string;
   phone: string;
+  visitDate: string;
   email: string;
   cityCountry: string;
-  unitType: string;
   message?: string | undefined;
 };
 
@@ -18,15 +18,22 @@ export async function submitInquiry(values: InquiryPayload) {
     throw new Error("Inquiry sheet URL is not configured");
   }
 
+  const visitDate = values.visitDate.trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(visitDate)) {
+    throw new Error("Please choose a visit date");
+  }
+
+  // Form fields, not JSON. The sheet script reads e.parameter when the body is not JSON,
+  // which is how visitDate is stored in the Expected visit date column.
   const response = await fetch(INQUIRY_SHEET_URL, {
     method: "POST",
-    body: JSON.stringify({
-      fullName: values.fullName,
-      phone: values.phone,
-      email: values.email,
-      cityCountry: values.cityCountry,
-      unitType: values.unitType,
-      message: values.message ?? "",
+    body: new URLSearchParams({
+      fullName: values.fullName.trim(),
+      phone: values.phone.trim(),
+      email: values.email.trim(),
+      cityCountry: values.cityCountry.trim(),
+      message: (values.message ?? "").trim(),
+      visitDate,
     }),
   });
 

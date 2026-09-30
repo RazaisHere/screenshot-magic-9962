@@ -11,7 +11,7 @@
  *    in src/lib/inquiry-sheet.ts, then restart the dev server.
  *
  * Columns, in order:
- * Full Name | Phone/Whatsapp | Email | City/Country | Preferred Unit Type | Optional message
+ * Full Name | Phone/Whatsapp | Email | City/Country | Optional message | Expected visit date
  */
 var SPREADSHEET_ID = "1fGANxX5zKrGz0OzvYH_qSqqFdRZlIPDNrYUeBpAqP40";
 
@@ -20,8 +20,8 @@ var HEADERS = [
   "Phone/Whatsapp",
   "Email",
   "City/Country",
-  "Preferred Unit Type",
   "Optional message",
+  "Expected visit date",
 ];
 
 function doPost(e) {
@@ -36,8 +36,8 @@ function doPost(e) {
       text_(data.phone),
       text_(data.email),
       text_(data.cityCountry),
-      text_(data.unitType),
       text_(data.message),
+      text_(data.visitDate),
     ]);
     return json_({ ok: true });
   } catch (error) {
@@ -65,13 +65,23 @@ function ensureHeaders_(sheet) {
 }
 
 function readBody_(e) {
+  var data = {};
+  var params = (e && e.parameter) || {};
   var raw = e && e.postData && e.postData.contents;
   if (raw) {
     try {
-      return JSON.parse(raw);
+      var parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") data = parsed;
     } catch (ignore) {}
   }
-  return (e && e.parameter) || {};
+  var keys = ["fullName", "phone", "email", "cityCountry", "message", "visitDate"];
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    if ((data[key] == null || String(data[key]).trim() === "") && params[key]) {
+      data[key] = params[key];
+    }
+  }
+  return data;
 }
 
 function text_(value) {

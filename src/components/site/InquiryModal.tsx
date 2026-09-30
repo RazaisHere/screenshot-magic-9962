@@ -102,8 +102,10 @@ export function InquiryModalProvider({ children }: { children: ReactNode }) {
                 <X className="size-4" aria-hidden />
               </button>
               <div className="max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 sm:p-8">
-                <p className="eyebrow">Private consultation</p>
-                <h2 className="mt-2 font-display text-2xl sm:text-3xl">Request current pricing</h2>
+                <p className="eyebrow hidden lg:block">Private consultation</p>
+                <h2 className="font-display text-2xl sm:text-3xl lg:mt-2">
+                  Request current pricing
+                </h2>
                 <p className="mt-2 mb-6 text-sm text-muted-foreground">
                   Share a few details and our team will send availability, floor plans and the
                   current payment plan.

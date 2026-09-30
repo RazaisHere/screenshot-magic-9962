@@ -1,13 +1,11 @@
 import { type ReactNode } from "react";
 import {
   AMENITIES,
-  DEVELOPER_PILLARS,
   EXPERIENCES,
   FAQS,
   HIGHLIGHTS,
   PAYMENT_STEPS,
   TESTIMONIALS,
-  VERIFICATION_POINTS,
 } from "./content";
 import { Button } from "@/components/ui/button";
 import { useInquiryModal } from "./InquiryModal";
@@ -20,12 +18,7 @@ import {
 import {
   BedDouble,
   Building2,
-  Check,
-  DraftingCompass,
-  Globe,
-  HardHat,
   Quote,
-  ScrollText,
   ShieldCheck,
   SquareParking,
   Trees,
@@ -307,81 +300,6 @@ export function ConstructionProgress() {
             />
           </div>
         </figure>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Verification ---------------- */
-
-export function Verification() {
-  return (
-    <section className="bg-background py-24 lg:py-32">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
-        <div className="max-w-lg">
-          <p className="eyebrow">Due diligence</p>
-          <h2 className="mt-3 font-display text-4xl leading-[1.08] sm:text-5xl">
-            Verify before you book
-          </h2>
-          <hr className="rule-gold my-7 max-w-24" />
-          <p className="leading-relaxed text-muted-foreground">
-            A serious purchase deserves serious checks. We encourage every buyer to confirm the
-            project&rsquo;s documentation independently — and we provide what you need to do it.
-          </p>
-          <InquiryCta variant="gold" className="mt-9">
-            Request the documents
-          </InquiryCta>
-        </div>
-
-        <ul className="surface-card rounded-md p-8">
-          <li className="eyebrow mb-6 list-none">Verification checklist</li>
-          {VERIFICATION_POINTS.map((p) => (
-            <li key={p} className="flex gap-3 border-b border-border/70 py-4 last:border-0">
-              <Check className="mt-0.5 size-4 shrink-0 text-gold-deep" aria-hidden />
-              <span className="text-sm leading-relaxed text-muted-foreground">{p}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Developer ---------------- */
-
-const DEVELOPER_ICONS = {
-  "Cross-border experience": Globe,
-  "Design-led practice": DraftingCompass,
-  "Construction discipline": HardHat,
-  "Client-side transparency": ScrollText,
-} as const;
-
-export function Developer() {
-  return (
-    <section className="border-y border-border bg-sand/50 py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="max-w-2xl">
-          <p className="eyebrow">The developer</p>
-          <h2 className="mt-3 font-display text-4xl leading-[1.08] sm:text-5xl">
-            A cross-border legacy
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Goldcrest Views is a landmark luxury residential project by Al-Ghurair Giga.
-          </p>
-        </div>
-        <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {DEVELOPER_PILLARS.map((d) => {
-            const Icon = DEVELOPER_ICONS[d.title as keyof typeof DEVELOPER_ICONS];
-            return (
-              <div key={d.title}>
-                <Icon className="size-4 text-gold-deep" aria-hidden />
-                <hr className="rule-gold mt-5 max-w-12" />
-                <h3 className="mt-5 font-display text-xl">{d.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d.body}</p>
-              </div>
-            );
-          })}
-        </div>
       </div>
     </section>
   );

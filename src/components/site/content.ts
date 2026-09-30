@@ -68,33 +68,6 @@ export const GALLERY_CATEGORIES = ["All", "Exteriors", "Views", "Construction"] 
 
 export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
 
-export const VERIFICATION_POINTS = [
-  "Ask for the approved building plan and confirm it against the regulator's record.",
-  "Verify the developer's registration and project NOC before any payment.",
-  "Request a written payment schedule with named milestones and dates.",
-  "Pay only into the project's official account and keep stamped receipts.",
-  "Read the allocation and sale agreement in full, including handover terms.",
-];
-
-export const DEVELOPER_PILLARS = [
-  {
-    title: "Cross-border experience",
-    body: "A team that has delivered residential and mixed-use projects across two markets.",
-  },
-  {
-    title: "Design-led practice",
-    body: "Architecture, interiors and landscape coordinated from a single brief.",
-  },
-  {
-    title: "Construction discipline",
-    body: "Independent supervision and staged quality checks through every phase.",
-  },
-  {
-    title: "Client-side transparency",
-    body: "A clear record of the purchase, from allocation through to handover.",
-  },
-];
-
 export const EXPERIENCES = [
   { title: "Sales lounge", body: "Walk through layouts, materials and floor plates in person." },
   {
