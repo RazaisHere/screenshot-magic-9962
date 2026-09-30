@@ -61,28 +61,28 @@ export function Hero() {
       <div className="mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col px-5 pt-[4.75rem] pb-2 sm:px-8 xl:pt-20">
         <div className="hero-stack grid min-h-0 flex-1 content-center items-center gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-10">
           <div className="reveal-up hidden lg:block lg:self-center">
-            <p className="eyebrow text-gold-light lg:text-sm">In progress · Giga City</p>
+            <p className="eyebrow text-gold-light lg:text-sm">In progress · Downtown Giga</p>
             <h1 className="mt-2 whitespace-nowrap font-display text-[clamp(1.35rem,4.2vw,2.6rem)] leading-none text-on-dark lg:text-[clamp(2.6rem,3.8vw,4.75rem)]">
-            The <span className="text-gold-gradient">Goldcrest Views</span>
+            Goldcrest<span className="text-gold-gradient"> Views</span>
             </h1>
             <p className="mt-2 max-w-xl text-base leading-snug text-on-dark-muted/85 sm:text-lg lg:mt-4 lg:text-xl lg:leading-relaxed">
-              Seven 40-storey towers in the heart of Giga City, from studios to duplexes beside Giga Mall.
+              Eight 40-storey towers in the heart of Downtown Giga, DHA II Islamabad.
             </p>
 
             <HeroAwards className="mt-4 max-w-xl" />
           </div>
 
           <h1 className="hero-mobile-title reveal-up text-center font-display text-[clamp(2.15rem,10vw,3rem)] leading-none text-on-dark lg:hidden">
-            The <span className="text-gold-gradient">Goldcrest Views</span>
+          Goldcrest<span className="text-gold-gradient"> Views</span>
           </h1>
 
           <div
             id="inquiry"
             className="hero-inquiry reveal-up scroll-mt-28 rounded-[0.7rem] border p-3 sm:p-5 lg:self-center lg:p-6"
           >
-            <p className="eyebrow hidden text-center text-gold-light lg:block">Private consultation</p>
+          
             <h2 className="mb-4 text-center font-display text-xl text-on-dark sm:text-2xl lg:mt-1">
-              Request current pricing
+              Request Information
             </h2>
             <InquiryForm tone="onImage" compact />
           </div>

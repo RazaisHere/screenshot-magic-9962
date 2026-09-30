@@ -10,7 +10,7 @@ export const NAV_LINKS = [
 
 export const HIGHLIGHTS = [
   {
-    title: "Seven 40-storey towers",
+    title: "Eight 40-storey towers",
     body: "Dubai-inspired towers that redefine Islamabad’s skyline.",
   },
   {
@@ -19,22 +19,22 @@ export const HIGHLIGHTS = [
   },
   {
     title: "World-class amenities",
-    body: "A temperature-controlled pool, private security, parking and a podium deck.",
+    body: "Temperature-controlled infinity pools, 24/7 AI-integrated security,covered parking and dedicated podium.",
   },
   {
-    title: "Three-year payment plans",
-    body: "Flexible 3-year plans, with rental management for overseas investors.",
+    title: "Three-year payment plan",
+    body: "Flexible 3-year plan, with dedicated Airbnb rental model for investors.",
   },
 ];
 
 export const AMENITIES = [
   {
-    title: "Swimming Pool",
-    body: "Temperature-controlled pool for exercise and relaxation.",
+    title: "Infinity Pools",
+    body: "Temperature-controlled infinity pools for exercise and relaxation.",
   },
   {
     title: "Private Security",
-    body: "24/7 protection with trained staff and surveillance.",
+    body: "24/7 protection with trained staff and AI-integrated surveillance.",
   },
   {
     title: "Parking Space",
@@ -55,7 +55,7 @@ export const PAYMENT_STEPS = [
   {
     step: "02",
     title: "Rental management",
-    body: "Dedicated rental management for overseas investors.",
+    body: "Dedicated Airbnb rental model for investors.",
   },
   {
     step: "03",
@@ -69,43 +69,57 @@ export const GALLERY_CATEGORIES = ["All", "Exteriors", "Views", "Construction"] 
 export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
 
 export const EXPERIENCES = [
-  { title: "Sales lounge", body: "Walk through layouts, materials and floor plates in person." },
+  { title: "Sales Office", body: "Walk through layouts, materials and floor plates in person." },
   {
     title: "Site visit",
     body: "See the structure as it rises and meet the construction team on-site.",
   },
-  {
-    title: "Virtual tour",
-    body: "Review the project remotely with a guided call for overseas buyers.",
-  },
-  { title: "Sample apartment", body: "Review finishes and layouts with the sales team." },
+  
+  { title: "Model Apartment", body: "Review finishes and layouts with the sales team." },
 ];
 
 export const TESTIMONIALS = [
   {
     quote:
-      "The team answered every question about documentation before we paid anything. That is what convinced us.",
-    name: "Ayesha R.",
-    role: "Apartment buyer",
+      "Actress Ushna Shah shares her thoughts about Goldcrest Views Model Apartments in Giga Mall Islamabad",
+    name: "Ushna Shah",
+    role: "Actress",
+    image: "/testimonials/ushna-shah.jpg",
+    videoUrl:
+      "https://goldcrestviews.com.pk/wp-content/uploads/2025/07/Actress-Ushna-Shah-at-Goldcrest-Views-Model-Apartments-in-Giga-Mall-Islamabad-Full-Video-Giga-Mall-720p-h264.mp4",
   },
   {
     quote:
-      "Buying from abroad was straightforward. The team kept every document clear before we committed.",
-    name: "Bilal K.",
-    role: "Overseas investor",
+      "Celebrity Chef Gulzar shares his experience at Goldcrest Views Model Apartments in Giga Mall Islamabad",
+    name: "Chef Gulzar",
+    role: "Celebrity Chef",
+    image: "/testimonials/chef-gulzar.jpg",
+    videoUrl:
+      "https://goldcrestviews.com.pk/wp-content/uploads/2025/07/Chef-Gulzar-at-Goldcrest-Views-Islamabad-Model-Apartments-Giga-Mall-Islamabad-Giga-Mall-720p-h264.mp4",
   },
   {
     quote:
-      "Being next to Giga Mall decided it for us. The three-year plan let us book without waiting for possession.",
-    name: "Sara M.",
-    role: "Family buyer",
+      "Renowned actor Faisal Qureshi visits Goldcrest Views Model Apartments in Giga Mall Islamabad",
+    name: "Faisal Qureshi",
+    role: "Actor & Host",
+    image: "/testimonials/faisal-qureshi.jpg",
+    videoUrl:
+      "https://goldcrestviews.com.pk/wp-content/uploads/2025/07/Faysal-Quraishi-visit-to-Goldcrest-Views-Model-Apartments-in-Giga-Mall-Islamabad-Giga-Group-Giga-Mall-720p-h264.mp4",
+  },
+  {
+    quote: "Actress Kubra Khan at Goldcrest Views Model Apartments in Giga Mall Islamabad",
+    name: "Kubra Khan",
+    role: "Actress & Model",
+    image: "/testimonials/kubra-khan.jpg",
+    videoUrl:
+      "https://goldcrestviews.com.pk/wp-content/uploads/2025/07/Kubra-Khan-at-Goldcrest-Views-Islamabad-Model-Apartments-Giga-Mall-Islamabad-Giga-Mall-720p-h264.mp4",
   },
 ];
 
 export const FAQS = [
   {
     q: "Where is Goldcrest Views located?",
-    a: "Goldcrest Views is in the prime heart of Giga City, Islamabad, adjacent to Giga Mall, with connectivity along GT Road and the Islamabad Highway to the twin cities.",
+    a: "Goldcrest Views is in the prime heart of Downtown Giga, Islamabad, adjacent to Giga Mall, with connectivity along Islamabad Express way and the Islamabad Highway to the twin cities.",
   },
   {
     q: "What unit types are available?",
@@ -113,18 +127,33 @@ export const FAQS = [
   },
   {
     q: "Is a payment plan available?",
-    a: "Yes. Flexible 3-year payment plans are available, along with dedicated rental management for overseas investors.",
+    a: "Yes. Flexible 3-year payment plan is available, along with dedicated Airbnb rental management for overseas investors.",
   },
-  {
-    q: "How can I verify the project before booking?",
-    a: "Request the approved building plan, the developer's registration and the project NOC, and confirm them with the relevant authority. We provide copies on request.",
-  },
+ 
   {
     q: "Can overseas buyers purchase remotely?",
-    a: "Yes. Overseas investors can purchase remotely, and dedicated rental management is available once the home is ready.",
+    a: "Yes. Overseas investors can purchase remotely, and dedicated Airbnb rental management is available once the home is ready.",
   },
   {
     q: "When is possession expected?",
     a: "The project is in progress. Handover follows completion of construction, and the team shares the latest site position on request.",
+  },
+];
+
+export const DUBAI_TOWERS = [
+  {
+    title: "Goldcrest Views 1",
+    image: "/dubai/goldcrest-views-1.jpg",
+    body: "A 40-storey tower in JLT Cluster V with 376 homes, from studios to penthouses, and a rooftop pool near Dubai Marina and Palm Jumeirah.",
+  },
+  {
+    title: "Goldcrest Views 2",
+    image: "/dubai/goldcrest-views-2.jpg",
+    body: "A 39-storey tower of freehold apartments and offices in Jumeirah Lakes Towers, with lakeside and island views. Delivered.",
+  },
+  {
+    title: "Goldcrest Executive",
+    image: "/dubai/goldcrest-executive.jpg",
+    body: "A 40-storey mixed-use tower in JLT, with offices below and studios and one-bedroom homes above, plus a gym, pool, and 24/7 security.",
   },
 ];

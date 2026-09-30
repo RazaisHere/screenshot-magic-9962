@@ -20,13 +20,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Goldcrest Views — Luxury residences in Giga City" },
+      { title: "Goldcrest Views — Luxury residences in Downtown Giga" },
       {
         name: "description",
         content:
-          "Seven 40-storey towers by Al-Ghurair Giga in Giga City, Islamabad. Studios to 4-bedroom apartments,  with 3-year payment plans.",
+          "Eight 40-storey towers by Giga Group in Downtown Giga, Islamabad. Studios to 4-bedroom apartments,  with 3-year payment plan.",
       },
-      { property: "og:title", content: "Goldcrest Views — Luxury residences in Giga City" },
+      { property: "og:title", content: "Goldcrest Views — Luxury residences in Downtown Giga" },
       {
         property: "og:description",
         content:

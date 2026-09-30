@@ -82,8 +82,15 @@ export function Gallery() {
         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
       />
       <span
+        aria-hidden
         className={cn(
-          "absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,oklch(0.18_0.02_70/0.82),transparent)] p-4 text-xs text-[oklch(0.99_0.005_90)] transition-opacity duration-300",
+          "pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-[linear-gradient(to_top,oklch(0.12_0.02_60/0.94),oklch(0.12_0.02_60/0.55)_46%,transparent)] transition-opacity duration-300",
+          mosaic ? "opacity-0 group-hover:opacity-100" : "opacity-100",
+        )}
+      />
+      <span
+        className={cn(
+          "absolute inset-x-0 bottom-0 p-4 text-xs text-[oklch(0.99_0.005_90)] transition-opacity duration-300",
           mosaic ? "opacity-0 group-hover:opacity-100" : "opacity-100",
         )}
       >
@@ -156,7 +163,7 @@ export function Gallery() {
         <div
           role="tablist"
           aria-label="Gallery categories"
-          className="mt-10 -mx-5 flex gap-2 overflow-x-auto px-5 pb-2 sm:mx-0 sm:flex-wrap sm:px-0"
+          className="mt-10 mb-6 -mx-5 flex gap-2 overflow-x-auto px-5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 md:mb-0"
         >
           {GALLERY_CATEGORIES.map((c) => (
             <button

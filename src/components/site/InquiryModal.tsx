@@ -85,7 +85,7 @@ export function InquiryModalProvider({ children }: { children: ReactNode }) {
             <div
               role="dialog"
               aria-modal="true"
-              aria-label="Request current pricing"
+              aria-label="Request Information"
               onClick={(e) => e.stopPropagation()}
               className={cn(
                 "relative w-full max-w-lg overflow-hidden rounded-[1.25rem] border border-gold/35 bg-ink text-on-dark shadow-[0_28px_80px_oklch(0_0_0/0.5)]",
@@ -103,12 +103,12 @@ export function InquiryModalProvider({ children }: { children: ReactNode }) {
                 <X className="size-4" aria-hidden />
               </button>
               <div className="max-h-[calc(100dvh-2rem)] overflow-y-auto px-5 pt-8 pb-6 sm:px-8 sm:pt-10 sm:pb-8">
-                <p className="eyebrow text-center text-gold-light">Private consultation</p>
+             
                 <h2 className="mt-2 text-center font-display text-[2rem] leading-none text-on-dark sm:text-4xl">
-                  Request current pricing
+                  Request Information
                 </h2>
                 <p className="mx-auto mt-3 max-w-sm text-center font-sans text-sm leading-relaxed text-on-dark-muted">
-                  Share a few details and our team will send availability, floor plans and the
+                  Share a few details and our team will send availability, floor plan and the
                   current payment plan.
                 </p>
                 <div aria-hidden className="mx-auto mt-5 mb-6 h-px w-16 bg-[image:var(--gradient-gold)]" />

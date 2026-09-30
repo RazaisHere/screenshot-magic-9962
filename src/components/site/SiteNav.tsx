@@ -34,8 +34,11 @@ export function SiteNav() {
           : "border-white/15 bg-[oklch(0.16_0.012_70/0.58)] backdrop-blur-md",
       )}
     >
-      <div className="mx-auto grid h-[4.75rem] max-w-[90rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:px-8 xl:h-20 xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] xl:px-10">
-        <a href="#top" className="flex min-w-0 items-center gap-3.5 justify-self-start">
+      <div className="relative mx-auto flex h-[4.75rem] max-w-[90rem] items-center px-5 sm:px-8 xl:grid xl:h-20 xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] xl:gap-4 xl:px-10">
+        <a
+          href="#top"
+          className="absolute left-1/2 -translate-x-1/2 xl:static xl:left-auto xl:translate-x-0 xl:justify-self-start"
+        >
           <img
             src="/logo.svg"
             alt="Goldcrest Views"
@@ -43,24 +46,6 @@ export function SiteNav() {
             height={56}
             className="size-14 shrink-0"
           />
-          <span className="min-w-0">
-            <span
-              className={cn(
-                "block truncate font-display text-lg leading-none font-semibold tracking-[0.04em]",
-                solid ? "text-foreground" : "text-on-dark",
-              )}
-            >
-              Goldcrest Views
-            </span>
-            <span
-              className={cn(
-                "mt-1.5 block text-[0.58rem] tracking-[0.34em] uppercase",
-                solid ? "text-muted-foreground" : "text-on-dark/70",
-              )}
-            >
-              Islamabad
-            </span>
-          </span>
         </a>
 
         <nav className="hidden items-center justify-center gap-6 xl:flex 2xl:gap-9" aria-label="Primary">
@@ -80,7 +65,7 @@ export function SiteNav() {
           ))}
         </nav>
 
-        <div className="flex items-center justify-end gap-3 justify-self-end">
+        <div className="ml-auto flex items-center justify-end gap-3 xl:ml-0 xl:justify-self-end">
           <button
             type="button"
             onClick={openInquiry}

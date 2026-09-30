@@ -73,16 +73,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Goldcrest Views — Luxury residences in Giga City" },
+      { title: "Goldcrest Views — Luxury residences in Downtown Giga" },
       {
         name: "description",
         content:
-          "Seven 40-storey towers by Al-Ghurair Giga in Giga City, Islamabad. Studios to 4-bedroom apartments with smart-home technology.",
+          "Eight 40-storey towers by Giga Group in Downtown Giga, Islamabad. Studios to 4-bedroom apartments with smart-home technology.",
       },
-      { property: "og:title", content: "Goldcrest Views — Luxury residences in Giga City" },
+      { property: "og:title", content: "Goldcrest Views — Luxury residences in Downtown Giga" },
       {
         property: "og:description",
-        content: "A luxury residential complex in Giga City, adjacent to Giga Mall.",
+        content: "A luxury residential complex in Downtown Giga, adjacent to Giga Mall.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -1,6 +1,7 @@
-import { type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import {
   AMENITIES,
+  DUBAI_TOWERS,
   EXPERIENCES,
   FAQS,
   HIGHLIGHTS,
@@ -19,7 +20,6 @@ import {
 import {
   BedDouble,
   Building2,
-  Quote,
   ShieldCheck,
   SquareParking,
   Trees,
@@ -51,10 +51,10 @@ function InquiryCta({
 /* ---------------- Highlights ---------------- */
 
 const HIGHLIGHT_ICONS = {
-  "Seven 40-storey towers": Building2,
+  "Eight 40-storey towers": Building2,
   "Studios to duplexes": BedDouble,
   "World-class amenities": Users,
-  "Three-year payment plans": Wallet,
+  "Three-year payment plan": Wallet,
 } as const;
 
 export function Highlights() {
@@ -62,7 +62,7 @@ export function Highlights() {
     <section id="overview" className="relative z-10 -mt-px bg-background">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <p className="border-b border-border py-6 text-center text-[0.65rem] tracking-[0.24em] text-muted-foreground uppercase">
-          Seven 40-storey towers by Al-Ghurair Giga, in the heart of Giga City
+          Eight 40-storey towers by Giga Group, in the heart of Downtown Giga, DHA II Islamabad.
         </p>
         <div className="grid gap-4 py-8 sm:grid-cols-2 lg:grid-cols-4">
           {HIGHLIGHTS.map((h) => {
@@ -119,11 +119,11 @@ export function Location() {
           </h2>
           <hr className="rule-gold my-7 max-w-24" />
           <p className="text-base leading-relaxed text-muted-foreground">
-            Goldcrest Views stands in the prime heart of Giga City, adjacent to Giga Mall. Seven
+            Goldcrest Views stands at the prime location of Downtown Giga DHA II Islamabad, adjacent to Giga Mall. Eight
             40-storey towers redefine Islamabad&rsquo;s skyline from this address.
           </p>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Connectivity runs along GT Road and the Islamabad Highway, linking the community to the
+            Connectivity runs along Islamabad Express way and the Islamabad Highway, linking the community to the
             twin cities.
           </p>
           <InquiryCta variant="goldOutline" className="mt-9">
@@ -139,29 +139,46 @@ export function Location() {
 
 export function Inspiration() {
   return (
-    <section className="relative isolate overflow-hidden bg-ink py-28 text-center lg:py-36">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-1/2 left-1/2 h-[28rem] w-[min(56rem,90vw)] -translate-x-1/2 -translate-y-[60%] bg-[radial-gradient(ellipse_at_center,oklch(0.72_0.13_72/0.34),transparent_68%)]"
-      />
-      <div className="relative mx-auto max-w-4xl px-5 sm:px-8">
-        <p className="eyebrow text-gold-light">Design philosophy</p>
-        <h2 className="mt-6 font-display text-[clamp(3.4rem,9vw,7rem)] leading-[0.88] font-semibold tracking-tight text-gold-gradient">
-          Dubai inspiration
-          <span className="mt-4 block font-sans text-[clamp(1.55rem,3.2vw,2.45rem)] leading-tight font-semibold tracking-tight text-on-dark">
-            Islamabad perspective
-          </span>
-        </h2>
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-on-dark-muted/75 sm:text-lg">
-          Dubai-inspired luxury meets Islamabad&rsquo;s natural beauty — modern sophistication with
-          timeless elegance. Technology and sustainable design work together, so every element is
-          both beautiful and useful, with care for the environment and the community.
-        </p>
-        <div aria-hidden className="mx-auto mt-12 flex items-center justify-center gap-4">
-          <span className="h-px w-16 bg-gold-light/80" />
-          <span className="size-2 rounded-full border border-gold-light" />
-          <span className="h-px w-16 bg-gold-light/80" />
+    <section className="relative isolate overflow-hidden bg-ink py-28 lg:py-36">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
+        <div className="relative min-w-0 text-center lg:text-left">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute top-1/2 left-1/2 h-[28rem] w-[min(56rem,90vw)] -translate-x-1/2 -translate-y-[77%] bg-[radial-gradient(ellipse_at_center,oklch(0.72_0.13_72/0.34),transparent_68%)]"
+          />
+          <p className="eyebrow text-gold-light">History in Dubai</p>
+          <h2 className="mt-6 font-display text-[clamp(2.8rem,5vw,4.75rem)] leading-[0.9] font-semibold tracking-tight text-gold-gradient">
+            Delivered in Dubai
+            <span className="mt-4 block font-sans text-[clamp(1.35rem,2.4vw,2rem)] leading-tight font-semibold tracking-tight text-on-dark">
+              Now in Islamabad
+            </span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-on-dark-muted/75 sm:text-lg lg:mx-0">
+            Goldcrest views initially delivered in Dubai at Jumeirah Lakes Towers Cluster V. The towers won best highvise development in dubai consectively back in 2008 & 2009. Considering it's huge success, Giga Group has brought the same project with improvised living & luxury now in islamabad.
+          </p>
+          <div aria-hidden className="mt-12 flex items-center justify-center gap-4 lg:justify-start">
+            <span className="h-px w-16 bg-gold-light/80" />
+            <span className="size-2 rounded-full border border-gold-light" />
+            <span className="h-px w-16 bg-gold-light/80" />
+          </div>
         </div>
+        <MobileCardCarousel always label="Delivered in Dubai">
+          {DUBAI_TOWERS.map((tower) => (
+            <article key={tower.title} className="overflow-hidden rounded-md border border-white/15 bg-white/5">
+              <img
+                src={tower.image}
+                alt={tower.title}
+                width={795}
+                height={530}
+                className="aspect-[3/2] w-full object-cover"
+              />
+              <div className="p-6 sm:p-7">
+                <h3 className="font-display text-2xl text-on-dark">{tower.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-on-dark-muted">{tower.body}</p>
+              </div>
+            </article>
+          ))}
+        </MobileCardCarousel>
       </div>
     </section>
   );
@@ -170,7 +187,7 @@ export function Inspiration() {
 /* ---------------- Amenities ---------------- */
 
 const AMENITY_ICONS = {
-  "Swimming Pool": Waves,
+  "Infinity Pools": Waves,
   "Private Security": ShieldCheck,
   "Parking Space": SquareParking,
   "Podium Level": Trees,
@@ -186,8 +203,7 @@ export function Amenities() {
             Life above the ordinary
           </h2>
           <p className="mt-4 text-muted-foreground">
-            A temperature-controlled pool, private security, covered parking and an elevated podium
-            deck.
+            A Temperature controlled infinity pools, 24/7 AI-intelligent security, covered parking and devoted podium.
           </p>
         </div>
 
@@ -237,10 +253,10 @@ export function Investment() {
         <div className="max-w-2xl">
           <p className="eyebrow text-gold-light">Investment</p>
           <h2 className="mt-3 font-display text-4xl leading-[1.08] text-on-dark sm:text-5xl">
-            Flexible premium ownership
+            Flexible Payment Plan
           </h2>
           <p className="mt-4 text-on-dark-muted/80">
-            Flexible 3-year payment plans, with dedicated rental management for overseas investors.
+            Flexible 3-year payment plan, with dedicated Airbnb rental management for investors.
           </p>
         </div>
 
@@ -275,7 +291,7 @@ export function ConstructionProgress() {
             Follow construction progress
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Goldcrest Views is in progress. The seven towers are rising in Giga City, and the team
+            Goldcrest Views is in progress. The seven towers are rising in Downtown Giga, and the team
             shares the latest site position on request.
           </p>
           {/* <p className="mt-6 font-display text-3xl text-gold-deep">In progress</p> */}
@@ -318,10 +334,10 @@ export function Experiences() {
             Experiences at Goldcrest Views
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Four ways to get to know the project — in person or from anywhere in the world.
+            Three ways to get to know the project — in person.
           </p>
         </div>
-        <MobileCardCarousel label="Experiences at Goldcrest Views">
+        <MobileCardCarousel label="Experiences at Goldcrest Views" className="mt-12">
           {EXPERIENCES.map((e) => (
             <article key={e.title} className="surface-card h-full rounded-md p-7">
               <h3 className="font-display text-xl">{e.title}</h3>
@@ -347,47 +363,86 @@ export function Experiences() {
 
 /* ---------------- Testimonials ---------------- */
 
-export function Testimonials() {
+function TestimonialCard({
+  quote,
+  name,
+  role,
+  image,
+  videoUrl,
+}: {
+  quote: string;
+  name: string;
+  role: string;
+  image: string;
+  videoUrl: string;
+}) {
   return (
-    <section className="bg-sand/60 py-24 lg:py-32">
+    <figure className="surface-card flex h-full flex-col overflow-hidden rounded-md">
+      <figcaption className="flex items-center gap-4 px-6 pt-6 pb-4 sm:px-8 sm:pt-8">
+        <img
+          src={image}
+          alt=""
+          width={64}
+          height={64}
+          className="size-16 shrink-0 rounded-full object-cover"
+        />
+        <span>
+          <span className="block text-lg font-medium">{name}</span>
+          <span className="mt-1 block text-xs tracking-[0.14em] text-muted-foreground uppercase">
+            {role}
+          </span>
+        </span>
+      </figcaption>
+      <div className="aspect-video bg-ink">
+        <video
+          className="h-full w-full bg-ink object-contain"
+          controls
+          playsInline
+          preload="metadata"
+          aria-label={`${name}, ${role}`}
+        >
+          <source src={videoUrl} type="video/mp4" />
+        </video>
+      </div>
+      <p className="p-6 font-display text-lg leading-snug sm:p-8">{quote}</p>
+    </figure>
+  );
+}
+
+export function Testimonials() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const pauseOtherVideos = () => {
+    const region = sectionRef.current?.querySelector('[aria-label="Celebrity Testimonials"]');
+    if (!region) return;
+    const bounds = region.getBoundingClientRect();
+    region.querySelectorAll("video").forEach((video) => {
+      const rect = video.getBoundingClientRect();
+      const visible = rect.right > bounds.left + 8 && rect.left < bounds.right - 8;
+      if (!visible) video.pause();
+    });
+  };
+
+  return (
+    <section ref={sectionRef} className="bg-sand/60 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="max-w-2xl">
           <p className="eyebrow">Testimonials</p>
           <h2 className="mt-3 font-display text-4xl leading-[1.08] sm:text-5xl">
-            What happy customers say
+            Celebrity Testimonials
           </h2>
         </div>
-        <MobileCardCarousel label="What happy customers say">
-          {TESTIMONIALS.map((t) => (
-            <figure key={t.name} className="surface-card flex h-full flex-col rounded-md p-8">
-              <Quote className="size-6 text-gold" aria-hidden />
-              <blockquote className="mt-5 flex-1 font-display text-xl leading-snug">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-              <figcaption className="mt-6 border-t border-border pt-4">
-                <span className="block text-sm font-medium">{t.name}</span>
-                <span className="block text-xs tracking-[0.14em] text-muted-foreground uppercase">
-                  {t.role}
-                </span>
-              </figcaption>
-            </figure>
-          ))}
-        </MobileCardCarousel>
-        <div className="mt-12 hidden gap-6 md:grid lg:grid-cols-3">
-          {TESTIMONIALS.map((t) => (
-            <figure key={t.name} className="surface-card flex flex-col rounded-md p-8">
-              <Quote className="size-6 text-gold" aria-hidden />
-              <blockquote className="mt-5 flex-1 font-display text-xl leading-snug">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-              <figcaption className="mt-6 border-t border-border pt-4">
-                <span className="block text-sm font-medium">{t.name}</span>
-                <span className="block text-xs tracking-[0.14em] text-muted-foreground uppercase">
-                  {t.role}
-                </span>
-              </figcaption>
-            </figure>
-          ))}
+        <div className="mt-12">
+          <MobileCardCarousel
+            always
+            perSlide={2}
+            label="Celebrity Testimonials"
+            onIndexChange={pauseOtherVideos}
+          >
+            {TESTIMONIALS.map((t) => (
+              <TestimonialCard key={t.name} {...t} />
+            ))}
+          </MobileCardCarousel>
         </div>
       </div>
     </section>
@@ -435,7 +490,7 @@ export function ClosingCta() {
           Make the next move on your address
         </h2>
         <p className="mt-4 text-on-dark-muted/80">
-          Share your details and our team will come back with availability, floor plans and pricing.
+          Share your details and our team will come back with availability, floor plan and pricing.
         </p>
         <InquiryCta variant="gold" className="mt-9">
           Request an appointment
@@ -461,7 +516,7 @@ export function SiteFooter() {
             <span className="font-display text-lg font-semibold">Goldcrest Views</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            A luxury residential complex by Al-Ghurair Giga in Giga City, Islamabad. Studios to
+            A luxury residential complex by Giga Group in Downtown Giga, Islamabad. Studios to
             4-bedroom apartments with smart-home technology.
           </p>
         </div>

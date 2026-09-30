@@ -276,7 +276,7 @@ export function InquiryForm({
         className="w-full rounded-[0.45rem] font-sans"
       >
         {isSubmitting && <Loader2 className="size-4 animate-spin" />}
-        {isSubmitting ? "Sending" : "Send Inquiry"}
+        {isSubmitting ? "Sending" : "Submit"}
       </Button>
 
     
