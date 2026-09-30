@@ -289,7 +289,7 @@ export function ConstructionProgress() {
             Follow construction progress
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Goldcrest Views is in progress. The seven towers are rising in Downtown Giga, and the team
+            Goldcrest Views is in progress. The Eight towers are rising in Downtown Giga, and the team
             shares the latest site position on request.
           </p>
           {/* <p className="mt-6 font-display text-3xl text-gold-deep">In progress</p> */}
