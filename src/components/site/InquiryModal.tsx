@@ -88,7 +88,7 @@ export function InquiryModalProvider({ children }: { children: ReactNode }) {
               aria-label="Request an appointment"
               onClick={(e) => e.stopPropagation()}
               className={cn(
-                "relative w-full max-w-[460px] rounded-md border border-border bg-card shadow-[var(--shadow-lift)]",
+                "relative w-full max-w-[460px] rounded-[0.7rem] border border-border bg-card shadow-[var(--shadow-lift)]",
                 closing ? "modal-panel-out" : "modal-panel-in",
               )}
             >
@@ -102,8 +102,8 @@ export function InquiryModalProvider({ children }: { children: ReactNode }) {
                 <X className="size-4" aria-hidden />
               </button>
               <div className="max-h-[calc(100dvh-2rem)] overflow-y-auto p-6 sm:p-8">
-                <p className="eyebrow hidden lg:block">Private consultation</p>
-                <h2 className="font-display text-2xl sm:text-3xl lg:mt-2">
+                <p className="eyebrow hidden text-center lg:block">Private consultation</p>
+                <h2 className="text-center font-display text-xl sm:text-2xl lg:mt-2">
                   Request current pricing
                 </h2>
                 <p className="mt-2 mb-6 text-sm text-muted-foreground">

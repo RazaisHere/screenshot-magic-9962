@@ -90,9 +90,9 @@ export function InquiryForm({
   };
 
   const fieldBase = cn(
-    "rounded-sm font-sans text-sm font-normal tracking-normal placeholder:font-sans focus-visible:ring-2 focus-visible:ring-gold",
+    "rounded-[0.45rem] font-sans text-sm font-normal tracking-normal placeholder:font-sans focus-visible:ring-2 focus-visible:ring-gold",
     tone === "onImage"
-      ? "border-white/30 bg-white/10 text-on-dark placeholder:text-on-dark/55"
+      ? "border-white/22 bg-white/[0.07] text-on-dark placeholder:text-on-dark/55"
       : "border-input bg-background/95 placeholder:text-muted-foreground/70",
     compact ? "h-9" : "h-11",
   );
@@ -242,9 +242,9 @@ export function InquiryForm({
           rows={compact ? 2 : 3}
           placeholder="Tell us what you're looking for"
           className={cn(
-            "resize-none rounded-sm font-sans text-sm font-normal tracking-normal focus-visible:ring-2 focus-visible:ring-gold",
+            "resize-none rounded-[0.45rem] font-sans text-sm font-normal tracking-normal focus-visible:ring-2 focus-visible:ring-gold",
             tone === "onImage"
-              ? "border-white/30 bg-white/10 text-on-dark placeholder:text-on-dark/55"
+              ? "border-white/22 bg-white/[0.07] text-on-dark placeholder:text-on-dark/55"
               : "border-input bg-background/95",
           )}
           {...register("message")}
@@ -263,7 +263,7 @@ export function InquiryForm({
         variant="gold"
         size={compact ? "default" : "xl"}
         disabled={isSubmitting}
-        className="w-full font-sans"
+        className="w-full rounded-[0.45rem] font-sans"
       >
         {isSubmitting && <Loader2 className="size-4 animate-spin" />}
         {isSubmitting ? "Sending" : "Send Inquiry"}

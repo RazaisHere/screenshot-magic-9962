@@ -11,7 +11,10 @@
  *    in src/lib/inquiry-sheet.ts, then restart the dev server.
  *
  * Columns, in order:
- * Full Name | Phone/Whatsapp | Email | City/Country | Optional message | Expected visit date
+ * Full Name | Phone/Whatsapp | Email | City/Country | Expected visit date | Optional message
+ *
+ * The published web app writes column E from unitType and column F from message.
+ * The website sends the visit date as unitType and the optional message as message.
  */
 var SPREADSHEET_ID = "1fGANxX5zKrGz0OzvYH_qSqqFdRZlIPDNrYUeBpAqP40";
 
@@ -20,8 +23,8 @@ var HEADERS = [
   "Phone/Whatsapp",
   "Email",
   "City/Country",
-  "Optional message",
   "Expected visit date",
+  "Optional message",
 ];
 
 function doPost(e) {
@@ -36,8 +39,8 @@ function doPost(e) {
       text_(data.phone),
       text_(data.email),
       text_(data.cityCountry),
+      text_(data.unitType),
       text_(data.message),
-      text_(data.visitDate),
     ]);
     return json_({ ok: true });
   } catch (error) {
@@ -74,7 +77,7 @@ function readBody_(e) {
       if (parsed && typeof parsed === "object") data = parsed;
     } catch (ignore) {}
   }
-  var keys = ["fullName", "phone", "email", "cityCountry", "message", "visitDate"];
+  var keys = ["fullName", "phone", "email", "cityCountry", "unitType", "message"];
   for (var i = 0; i < keys.length; i++) {
     var key = keys[i];
     if ((data[key] == null || String(data[key]).trim() === "") && params[key]) {

@@ -46,10 +46,10 @@ export function Hero() {
 
           <div
             id="inquiry"
-            className="hero-inquiry reveal-up scroll-mt-28 rounded-lg border p-3 sm:p-5 lg:self-center lg:p-6"
+            className="hero-inquiry reveal-up scroll-mt-28 rounded-[0.7rem] border p-3 sm:p-5 lg:self-center lg:p-6"
           >
-            <p className="eyebrow hidden lg:block">Private consultation</p>
-            <h2 className="mb-4 font-display text-2xl text-on-dark sm:text-3xl lg:mt-1">
+            <p className="eyebrow hidden text-center lg:block">Private consultation</p>
+            <h2 className="mb-4 text-center font-display text-xl text-on-dark sm:text-2xl lg:mt-1">
               Request current pricing
             </h2>
             <InquiryForm tone="onImage" compact />

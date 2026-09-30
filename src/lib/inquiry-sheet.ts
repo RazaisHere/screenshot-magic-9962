@@ -23,17 +23,18 @@ export async function submitInquiry(values: InquiryPayload) {
     throw new Error("Please choose a visit date");
   }
 
-  // Form fields, not JSON. The sheet script reads e.parameter when the body is not JSON,
-  // which is how visitDate is stored in the Expected visit date column.
+  // The published web app writes column E from unitType and column F from message.
+  // E is Expected visit date. F is Optional message.
   const response = await fetch(INQUIRY_SHEET_URL, {
     method: "POST",
-    body: new URLSearchParams({
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({
       fullName: values.fullName.trim(),
       phone: values.phone.trim(),
       email: values.email.trim(),
       cityCountry: values.cityCountry.trim(),
+      unitType: visitDate,
       message: (values.message ?? "").trim(),
-      visitDate,
     }),
   });
 
