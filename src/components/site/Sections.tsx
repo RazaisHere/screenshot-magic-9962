@@ -154,7 +154,7 @@ export function Inspiration() {
             </span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-on-dark-muted/75 sm:text-lg lg:mx-0">
-            Goldcrest views initially delivered in Dubai at Jumeirah Lakes Towers Cluster V. The towers won best highvise development in dubai consectively back in 2008 & 2009. Considering it's huge success, Giga Group has brought the same project with improvised living & luxury now in islamabad.
+            Goldcrest views initially delivered in Dubai at Jumeirah Lakes Towers Cluster V. The towers won best high rise development in dubai consectively back in 2008 & 2009. Considering it's huge success, Giga Group has brought the same project with improvised living & luxury now in islamabad.
           </p>
           <div aria-hidden className="mt-12 flex items-center justify-center gap-4 lg:justify-start">
             <span className="h-px w-16 bg-gold-light/80" />
