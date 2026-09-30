@@ -8,31 +8,48 @@ type Shot = {
   src: string;
   alt: string;
   category: Exclude<GalleryCategory, "All">;
-  span?: string;
+  focus?: string;
+  startRow?: boolean;
 };
 
 const SHOTS: Shot[] = [
   {
+    src: "/gallery/magnific_add-the-2-labors-doing-pl_fFvDrYWCDY.jpg.jpeg",
+    alt: "Two workers plastering an interior wall and ceiling of the tower",
+    category: "Interior",
+    focus: "object-[center_28%]",
+  },
+  {
+    src: "/gallery/interior-2.jpg",
+    alt: "Interior plaster work with the neighbouring tower beyond the opening",
+    category: "Interior",
+  },
+  {
+    src: "/gallery/interior-3.jpeg",
+    alt: "Workers laying block on an open floor of the tower",
+    category: "Interior",
+  },
+  {
     src: "/gallery/views/v2-01.jpg",
     alt: "Wide aerial of the Goldcrest Views towers in the Islamabad neighbourhood",
     category: "Exteriors",
-    span: "md:col-span-2 md:row-span-2",
-  },
-  {
-    src: "/gallery/views/v1-01.jpg",
-    alt: "Close aerial of the towers with cranes on site",
-    category: "Construction",
-  },
-  {
-    src: "/gallery/views/v2-05.jpg",
-    alt: "The towers seen against the wider city",
-    category: "Views",
+    startRow: true,
   },
   {
     src: "/gallery/views/v1-06.jpg",
     alt: "The tower elevation from the air",
     category: "Exteriors",
-    span: "md:col-span-2",
+  },
+  {
+    src: "/gallery/views/v2-04.jpg",
+    alt: "The tower facades from across the neighbourhood",
+    category: "Exteriors",
+  },
+  {
+    src: "/gallery/views/v2-05.jpg",
+    alt: "The towers seen against the wider city",
+    category: "Views",
+    startRow: true,
   },
   {
     src: "/gallery/views/v2-09.jpg",
@@ -40,19 +57,9 @@ const SHOTS: Shot[] = [
     category: "Views",
   },
   {
-    src: "/gallery/views/v1-18.jpg",
-    alt: "Structure and cranes progressing on the towers",
-    category: "Construction",
-  },
-  {
     src: "/gallery/views/v1-04.jpg",
-    alt: "Overhead view of the Goldcrest Views site",
+    alt: "The towers rising above the surrounding neighbourhood",
     category: "Views",
-  },
-  {
-    src: "/gallery/views/v2-13.jpg",
-    alt: "The construction site from above the neighbourhood",
-    category: "Construction",
   },
 ];
 
@@ -72,14 +79,17 @@ export function Gallery() {
       onClick={() => openShot(shot)}
       className={cn(
         "group relative h-[240px] w-full cursor-pointer overflow-hidden rounded-md bg-muted text-left md:h-full",
-        mosaic && active === "All" ? shot.span : undefined,
+        mosaic && shot.startRow && "md:col-start-1",
       )}
     >
       <img
         src={shot.src}
         alt=""
         loading="lazy"
-        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+        className={cn(
+          "h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]",
+          shot.focus,
+        )}
       />
       <span
         aria-hidden
@@ -156,7 +166,7 @@ export function Gallery() {
             Views of the towers
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Exteriors, neighbourhood views and live construction — filter by what you want to see.
+            Interiors, exteriors and neighbourhood views — filter by what you want to see.
           </p>
         </div>
 
@@ -188,7 +198,7 @@ export function Gallery() {
           {shots.map((shot, index) => shotCard(shot, index, false))}
         </MobileCardCarousel>
 
-        <div className="mt-8 hidden auto-rows-[220px] grid-cols-1 gap-4 sm:grid-cols-2 md:grid md:auto-rows-[240px] md:grid-cols-4">
+        <div className="mt-8 hidden auto-rows-[240px] gap-4 md:grid md:grid-cols-3">
           {shots.map((shot, index) => shotCard(shot, index, true))}
         </div>
       </div>

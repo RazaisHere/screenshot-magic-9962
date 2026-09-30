@@ -230,6 +230,15 @@ export function InquiryForm({
               aria-describedby={errors.visitDate ? `${fieldId}-visitDate-error` : undefined}
               className={cn(fieldBase, "visit-date w-full", tone === "onImage" && "visit-date-on-image")}
               {...register("visitDate")}
+              onClick={(event) => {
+                const input = event.currentTarget;
+                if (typeof input.showPicker !== "function") return;
+                try {
+                  input.showPicker();
+                } catch {
+                  // Already open, or this browser opens the picker from the field itself.
+                }
+              }}
             />
             <Calendar
               aria-hidden

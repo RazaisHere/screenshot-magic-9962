@@ -64,7 +64,7 @@ export const PAYMENT_STEPS = [
   },
 ];
 
-export const GALLERY_CATEGORIES = ["All", "Exteriors", "Views", "Construction"] as const;
+export const GALLERY_CATEGORIES = ["All", "Interior", "Exteriors", "Views"] as const;
 
 export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
 
@@ -143,17 +143,17 @@ export const FAQS = [
 export const DUBAI_TOWERS = [
   {
     title: "Goldcrest Views 1",
-    image: "/dubai/goldcrest-views-1.jpg",
+    image: "/dubai/goldcrest%20views%201.jpg",
     body: "A 40-storey tower in JLT Cluster V with 376 homes, from studios to penthouses, and a rooftop pool near Dubai Marina and Palm Jumeirah.",
   },
   {
     title: "Goldcrest Views 2",
-    image: "/dubai/goldcrest-views-2.jpg",
+    image: "/dubai/goldcrest%20views%202.jpg",
     body: "A 39-storey tower of freehold apartments and offices in Jumeirah Lakes Towers, with lakeside and island views. Delivered.",
   },
   {
     title: "Goldcrest Executive",
-    image: "/dubai/goldcrest-executive.jpg",
+    image: "/dubai/goldcrest%20views%20executive.jpg",
     body: "A 40-storey mixed-use tower in JLT, with offices below and studios and one-bedroom homes above, plus a gym, pool, and 24/7 security.",
   },
 ];

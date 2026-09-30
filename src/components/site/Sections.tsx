@@ -62,7 +62,7 @@ export function Highlights() {
     <section id="overview" className="relative z-10 -mt-px bg-background">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <p className="border-b border-border py-6 text-center text-[0.65rem] tracking-[0.24em] text-muted-foreground uppercase">
-          Eight 40-storey towers by Giga Group, in the heart of Downtown Giga, DHA II Islamabad.
+          Eight 40-storey towers by Giga Group, in the heart of Downtown Giga, DHA-II Islamabad.
         </p>
         <div className="grid gap-4 py-8 sm:grid-cols-2 lg:grid-cols-4">
           {HIGHLIGHTS.map((h) => {
@@ -119,7 +119,7 @@ export function Location() {
           </h2>
           <hr className="rule-gold my-7 max-w-24" />
           <p className="text-base leading-relaxed text-muted-foreground">
-            Goldcrest Views stands at the prime location of Downtown Giga DHA II Islamabad, adjacent to Giga Mall. Eight
+            Goldcrest Views stands at the prime location of Downtown Giga DHA-II Islamabad, adjacent to Giga Mall. Eight
             40-storey towers redefine Islamabad&rsquo;s skyline from this address.
           </p>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
@@ -164,13 +164,11 @@ export function Inspiration() {
         </div>
         <MobileCardCarousel always label="Delivered in Dubai">
           {DUBAI_TOWERS.map((tower) => (
-            <article key={tower.title} className="overflow-hidden rounded-md border border-white/15 bg-white/5">
+            <article key={tower.title} className="mx-auto w-fit max-w-full overflow-hidden rounded-md border border-white/15 bg-white/5">
               <img
                 src={tower.image}
                 alt={tower.title}
-                width={795}
-                height={530}
-                className="aspect-[3/2] w-full object-cover"
+                className="mx-auto block h-auto max-h-[32rem] w-auto max-w-full"
               />
               <div className="p-6 sm:p-7">
                 <h3 className="font-display text-2xl text-on-dark">{tower.title}</h3>
@@ -297,7 +295,7 @@ export function ConstructionProgress() {
           {/* <p className="mt-6 font-display text-3xl text-gold-deep">In progress</p> */}
 
           <InquiryCta variant="goldOutline" className="mt-10">
-            Request the latest site report
+            Request report
           </InquiryCta>
         </div>
 

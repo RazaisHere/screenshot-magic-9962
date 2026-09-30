@@ -305,6 +305,14 @@ input.visit-date::-webkit-calendar-picker-indicator {
   opacity: 0;
 }
 
+input.visit-date::-webkit-inner-spin-button,
+input.visit-date::-webkit-clear-button {
+  display: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
 input.visit-date-on-image {
   color: #fff;
   color-scheme: dark;
@@ -432,6 +440,26 @@ input.visit-date-on-image::-webkit-datetime-edit-year-field {
     padding-left: 0.4rem;
     font-size: 0.7rem;
     letter-spacing: 0;
+  }
+
+  /* Some phone browsers draw a native dropdown arrow beside the calendar icon. */
+  input.visit-date {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: none;
+  }
+
+  input.visit-date::-webkit-calendar-picker-indicator,
+  input.visit-date::-webkit-inner-spin-button,
+  input.visit-date::-webkit-clear-button {
+    display: none;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0;
+    height: 0;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
   }
 }
 

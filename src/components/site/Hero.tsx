@@ -66,7 +66,7 @@ export function Hero() {
             Goldcrest<span className="text-gold-gradient"> Views</span>
             </h1>
             <p className="mt-2 max-w-xl text-base leading-snug text-on-dark-muted/85 sm:text-lg lg:mt-4 lg:text-xl lg:leading-relaxed">
-              Eight 40-storey towers in the heart of Downtown Giga, DHA II Islamabad.
+              Eight 40-storey towers in the heart of Downtown Giga, DHA-II Islamabad.
             </p>
 
             <HeroAwards className="mt-4 max-w-xl" />
